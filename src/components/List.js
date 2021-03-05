@@ -1,11 +1,20 @@
 import React from "react"
+import {connect} from "react-redux"
 import ListItem from "./ListItem"
 
 
-export default ({ list }) => {
-    if(!list.length){
+const Items = ({ items }) => {
+    if(!items.length){
         return <p>Сотрудников нет</p>
     }
-    
-    return list.map( (item, index) => <ListItem item={item} key={index}/>)
+
+    return items.map( (item, index) => <ListItem item={item} key={index}/>)
 }
+
+const mapStateToProps = state => {
+    return {
+        items: state.items.items
+    }
+}
+
+export default connect(mapStateToProps, null)(Items)

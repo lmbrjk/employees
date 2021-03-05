@@ -12,7 +12,7 @@ function App() {
         <div className="container__main">
           <h1>Список сотрудников</h1>
           <ul>
-            <List list={["сотрудник 1", "сотрудник 2", "сотрудник 3"]}/>
+            <List />
           </ul>
         </div>
         <div className="container__info"></div>
