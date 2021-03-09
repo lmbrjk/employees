@@ -1,30 +1,40 @@
 import React from "react"
+import {connect} from "react-redux"
+import {createItem} from "../redux/actions"
 
-export default class NewItem extends React.Component {
+class NewItem extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             name: "",
-            surname: ""
+            surname: "",
+            number: ""
         };
     }
 
     submitHandler = event => {
         event.preventDefault();
 
-        const {name, surname} = this.state;
+        const {name, surname, number} = this.state;
 
-        const newItem = {
-            name, surname
+        //небольшая проверка на незаполненные поля
+        if(!name.trim() || !surname.trim() || !number.trim()){
+            return
         }
 
-        console.log(newItem);
+        const newItem = {
+            name, surname, number
+        }
+
+        //изменяем state
+        this.props.createItem(newItem);
 
         this.setState({
             name: "",
-            surname: ""
+            surname: "",
+            number: ""
         })
         
     }
@@ -34,6 +44,7 @@ export default class NewItem extends React.Component {
         this.setState( prev => ({...prev, ...{
             [event.target.name]: event.target.value,
             [event.target.surname]: event.target.value,
+            [event.target.number]: event.target.number,
         }}));
     }
 
@@ -52,7 +63,15 @@ export default class NewItem extends React.Component {
                 value={this.state.surname}
                 onChange={this.changeInputHandler}
             />
+            <input type="number" placeholder="Табельный номер"
+                name="number"
+                
+                value={this.state.number}
+                onChange={this.changeInputHandler}
+            />
             <button type="submit">Создать</button>
         </form>
     )}
 }
+
+export default connect(null, {createItem})(NewItem)

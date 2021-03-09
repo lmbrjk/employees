@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import ListItem from "./ListItem"
 
 
+// items передается из mapStateToProps
 const Items = ({ items }) => {
     if(!items.length){
         return <p>Сотрудников нет</p>
@@ -13,6 +14,7 @@ const Items = ({ items }) => {
 
 const mapStateToProps = state => {
     return {
+        // присваиваем items значение из стейта state.items.items
         items: state.items.items
     }
 }
