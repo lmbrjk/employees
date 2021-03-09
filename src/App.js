@@ -1,9 +1,12 @@
 import List from "./components/List"
 import NewItem from "./components/NewItem"
 
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom"
+
 
 function App() {
   return (
+    <Router>
     <div className="App">
       <header>
         <nav>Навигация</nav>
@@ -14,11 +17,17 @@ function App() {
           <ul>
             <List />
           </ul>
+          <button>
+            <Link to="/new">Создать</Link>
+          </button>
         </div>
-        <div className="container__info"></div>
-        <div className="new-item"><NewItem /></div>      
+        <div className="container__info"></div>                  
+        <Switch>
+          <Route path="/new" component={NewItem} />
+        </Switch>
       </div>
     </div>
+    </Router>
   );
 }
 

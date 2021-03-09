@@ -9,14 +9,14 @@ const Items = ({ items }) => {
         return <p>Сотрудников нет</p>
     }
 
-    return items.map( (item, index) => <ListItem item={item} key={index}/>)
+    return items.map( (item, index) => <ListItem item={item} key={index} index={index} />);
 }
 
 const mapStateToProps = state => {
     return {
         // присваиваем items значение из стейта state.items.items
         items: state.items.items
-    }
+    };
 }
 
 export default connect(mapStateToProps, null)(Items)

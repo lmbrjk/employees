@@ -1,7 +1,12 @@
 import React from "react"
+import { useParams } from "react-router-dom"
 
-export default () => {
+
+function Info(){
+    let {info} = useParams();
+
     return (
-        <div>{item}</div>
+        <div>{info}</div>
     )
 }
+export default Info;
