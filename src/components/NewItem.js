@@ -1,6 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {createItem} from "../redux/actions"
+import { Link } from "react-router-dom"
 
 class NewItem extends React.Component {
 
@@ -69,6 +70,7 @@ class NewItem extends React.Component {
                 value={this.state.number}
                 onChange={this.changeInputHandler}
             />
+            <Link to="/">Закрыть</Link>
             <button type="submit">Создать</button>
         </form>
     )}
