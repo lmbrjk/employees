@@ -11,6 +11,7 @@ class NewItem extends React.Component {
         this.state = {
             name: "",
             surname: "",
+            post: "",
             number: ""
         };
     }
@@ -18,16 +19,16 @@ class NewItem extends React.Component {
     submitHandler = event => {
         event.preventDefault();
 
-        const {name, surname, number} = this.state;
+        const {name, surname, post, number} = this.state;
 
         //небольшая проверка на незаполненные поля
-        if(!name.trim() || !surname.trim() || !number.trim()){
+        if(!name.trim() || !surname.trim() || !number.trim() || !post.trim()){
             return
         }
 
         const newItem = {
             id: Date.now().toString(),
-            name, surname, number
+            name, surname, post, number
         }
 
         //изменяем state
@@ -36,6 +37,7 @@ class NewItem extends React.Component {
         this.setState({
             name: "",
             surname: "",
+            post: "",
             number: ""
         })
         
@@ -46,6 +48,7 @@ class NewItem extends React.Component {
         this.setState( prev => ({...prev, ...{
             [event.target.name]: event.target.value,
             [event.target.surname]: event.target.value,
+            [event.target.post]: event.target.post,
             [event.target.number]: event.target.number,
         }}));
     }
@@ -63,6 +66,12 @@ class NewItem extends React.Component {
                 name="surname"
                 
                 value={this.state.surname}
+                onChange={this.changeInputHandler}
+            />
+            <input type="text" placeholder="Должность"
+                name="post"
+                
+                value={this.state.post}
                 onChange={this.changeInputHandler}
             />
             <input type="number" placeholder="Табельный номер"

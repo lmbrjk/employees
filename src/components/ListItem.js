@@ -5,7 +5,7 @@ export default ({ item }) => {
     return (       
         <li>    
             <Link to={`/info/${item.id}`}>
-                {item.name} {item.surname} {item.number}
+                {item.surname} {item.post}
             </Link>
         </li>        
     )
