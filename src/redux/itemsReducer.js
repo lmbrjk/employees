@@ -2,8 +2,8 @@ import {CREATE_ITEM} from "./types"
 
 const initialState = {
     items: [
-        {name: "Иван", surname: "Иванов", number: 333555},
-        {name: "Семен", surname: "Горбунков", number: 124899}
+        {id: 123451899367450121, name: "Иван", surname: "Иванов", number: 333555},
+        {id: 123451899365450100, name: "Семен", surname: "Горбунков", number: 124899}
     ]
 };
 

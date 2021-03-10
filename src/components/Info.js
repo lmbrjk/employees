@@ -8,7 +8,7 @@ function Info({ match }){
         state.items
     )
 
-    const user = users.items.find( item => item.number == match.params.id)
+    const user = users.items.find( item => item.id == match.params.id)
     
     return (
         <div>

@@ -26,6 +26,7 @@ class NewItem extends React.Component {
         }
 
         const newItem = {
+            id: Date.now().toString(),
             name, surname, number
         }
 
