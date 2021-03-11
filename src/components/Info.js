@@ -1,19 +1,26 @@
 import React from "react"
+import {connect} from "react-redux"
+import {getItem} from "../redux/actions"
 import { Link } from "react-router-dom"
 
+
+  
 class Info extends React.Component{ 
     
-    
-    
+    constructor(props) {
+        super(props) ;
 
-    changeData = () => {
-        console.log(this.props.match.params.id);
-        // dispatch({type:"CHANGE_ITEM", payload: });
+        this.state = {};
     }
+
+    // .filter(item => item.id === +this.props.match.params.id)
     
     render(){
+        console.log(getItem(+this.props.match.params.id));
+
         return (
-            <div>Info</div>
+           
+            <div>info</div>
             // <div>
             //     <span onClick={()=> changeData()}style={{margin:"10px"}}>{user.name}</span>
             //     <span style={{margin:"10px"}}>{user.surname}</span>
@@ -23,4 +30,6 @@ class Info extends React.Component{
         )
     }
 }
-export default Info;
+
+export default connect()(Info);
+
