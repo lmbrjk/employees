@@ -1,4 +1,6 @@
-import {CREATE_ITEM, CHANGE_ITEM} from "./types"
+import {CREATE_ITEM} from "./types"
+import {GET_USER} from "./types"
+
 
 export function createItem(item){
     return {
@@ -7,9 +9,9 @@ export function createItem(item){
     };
 }
 
-export function changeItem(data){
+export function getUser(id){
     return {
-        type: CHANGE_ITEM,
-        payload: data
+        type: GET_USER,
+        payload: id
     };
 }
