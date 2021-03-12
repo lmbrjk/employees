@@ -1,4 +1,4 @@
-import {CREATE_ITEM} from "./types"
+import {CREATE_ITEM, GET_ITEM} from "./types"
 
 const initialState = {
     items: [
@@ -13,6 +13,10 @@ export const itemsReducer = (state = initialState, action) => {
     switch (action.type){
         case CREATE_ITEM:
             return { ...state, items: state.items.concat([action.payload]) };
+        case GET_ITEM:            
+            return { ...state,
+                item: state.items.find(item => item.id === action.payload)
+            };
         default: return state;
     }
 }

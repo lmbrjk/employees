@@ -2,6 +2,8 @@ import React from "react"
 import {connect} from "react-redux"
 import { Link } from "react-router-dom"
 
+
+  
 class Info extends React.Component{ 
     
     constructor(props){
@@ -12,6 +14,8 @@ class Info extends React.Component{
             item.id === +this.props.match.params.id
         )
     }
+
+    // .filter(item => item.id === +this.props.match.params.id)
     
     
     render(){        
