@@ -1,5 +1,5 @@
 import {CREATE_ITEM} from "./types"
-import {GET_USER} from "./types"
+import {GET_INPUTS} from "./types"
 
 
 export function createItem(item){
@@ -9,9 +9,8 @@ export function createItem(item){
     };
 }
 
-export function getUser(id){
+export function getInputs(){
     return {
-        type: GET_USER,
-        payload: id
+        type: GET_INPUTS
     };
 }
