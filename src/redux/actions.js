@@ -7,9 +7,9 @@ export function createItem(item){
     };
 }
 
-export function changeItem(data){
+export function changeItem({id, changes}){
     return {
         type: CHANGE_ITEM,
-        payload: data
+        id, changes
     };
 }

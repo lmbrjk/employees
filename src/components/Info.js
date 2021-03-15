@@ -1,27 +1,47 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import {connect} from "react-redux"
 import { Link } from "react-router-dom"
+import { changeItem } from "../redux/actions"
 
-function Info({ match }){ 
+function Info({ match, items }){ 
+
+    let userID = match.params.id;
     
-    const dispatch = useDispatch();
+    let user = items.find( item => item.id === +userID);
 
-    const users = useSelector(state =>
-        state.items
-    );
-    const user = users.items.find( item => item.id == match.params.id);
-
-    const changeData = (data) => {
-        dispatch({type:"CHANGE_ITEM", payload: data});
+    const changeInput = (event) => {
+        let value = {
+            id: user.id,
+            value: event.target.value
+        }
+        
+        changeUser(value);
     }
-    
+        
     return (
         <div>
-            <span onClick={()=> changeData(prompt())}style={{margin:"10px"}}>{user.name}</span>
+            <span style={{margin:"10px"}}>{user.name}</span>
+            <input onChange={changeInput} type="text" style={{margin:"10px"}} />
             <span style={{margin:"10px"}}>{user.surname}</span>
             <span style={{margin:"10px"}}>{user.number}</span>
             <Link to="/">Закрыть</Link>
         </div>
     )
 }
-export default Info;
+
+const mapStateToProps = state => {
+    return {
+        // присваиваем items значение из стейта state.items.items
+        items: state.items.items
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        changeUser: (changes) => {
+            dispatch(changeItem(changes));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Info);
