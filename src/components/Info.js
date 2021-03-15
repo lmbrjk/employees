@@ -1,27 +1,18 @@
 import React from "react"
-import {connect} from "react-redux"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
 import { changeItem } from "../redux/actions"
 
-function Info({ match, items }){ 
+function Info({ match, items}){ 
 
     let userID = match.params.id;
     
     let user = items.find( item => item.id === +userID);
-
-    const changeInput = (event) => {
-        let value = {
-            id: user.id,
-            value: event.target.value
-        }
-        
-        changeUser(value);
-    }
         
     return (
         <div>
             <span style={{margin:"10px"}}>{user.name}</span>
-            <input onChange={changeInput} type="text" style={{margin:"10px"}} />
+            <input onChange={changeItem} type="text" style={{margin:"10px"}} />
             <span style={{margin:"10px"}}>{user.surname}</span>
             <span style={{margin:"10px"}}>{user.number}</span>
             <Link to="/">Закрыть</Link>
@@ -38,9 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeUser: (changes) => {
-            dispatch(changeItem(changes));
-        }
+        changeItem: (event) => dispatch(changeItem(event.target.value))
     };
 }
 

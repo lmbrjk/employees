@@ -14,8 +14,7 @@ export const itemsReducer = (state = initialState, action) => {
         case CREATE_ITEM:
             return { ...state, items: state.items.concat([action.payload]) };
         case CHANGE_ITEM:
-            //CHANGE FUNC
-            return { ...state, items: state.items.concat([action.payload]) };
+            return { ...state };
         default: return state;
     }
 }
