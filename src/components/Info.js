@@ -1,27 +1,36 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { useSelector, useDispatch } from 'react-redux'
+
 
 function Info({ match }){ 
     
     const dispatch = useDispatch();
 
-    const users = useSelector(state =>
-        state.items
-    );
-    const user = users.items.find( item => item.id == match.params.id);
+    const users = useSelector(state => state.items)
 
-    const changeData = (data) => {
-        dispatch({type:"CHANGE_ITEM", payload: data});
+    let user = users.items.find( item => item.id === match.params.id);
+
+    const logging = (event) => {
+        const payload = {
+            id: match.params.id,
+            changes: event.target.value
+        };        
+
+        dispatch({type: "CHANGE_ITEM", payload});
     }
-    
+        
     return (
         <div>
-            <span onClick={()=> changeData(prompt())}style={{margin:"10px"}}>{user.name}</span>
+            <span style={{margin:"10px"}}>{user.name}</span>
+            <input onChange={logging} type="text" style={{margin:"10px"}} />
+            <button>изменить имя</button>
             <span style={{margin:"10px"}}>{user.surname}</span>
             <span style={{margin:"10px"}}>{user.number}</span>
             <Link to="/">Закрыть</Link>
         </div>
     )
 }
-export default Info;
+
+export default connect()(Info);

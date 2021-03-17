@@ -48,8 +48,8 @@ class NewItem extends React.Component {
         this.setState( prev => ({...prev, ...{
             [event.target.name]: event.target.value,
             [event.target.surname]: event.target.value,
-            [event.target.post]: event.target.post,
-            [event.target.number]: event.target.number,
+            [event.target.post]: event.target.value,
+            [event.target.number]: event.target.value,
         }}));
     }
 
