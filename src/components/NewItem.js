@@ -19,16 +19,16 @@ class NewItem extends React.Component {
     submitHandler = event => {
         event.preventDefault();
 
-        const {name, surname, post, number} = this.state;
+        const {name, middlename, surname, number, post, division} = this.state;
 
         //небольшая проверка на незаполненные поля
-        if(!name.trim() || !surname.trim() || !number.trim() || !post.trim()){
+        if(!name.trim() || !middlename.trim() || !surname.trim() || !number.trim() || !post.trim() || !division.trim()){
             return
         }
 
         const newItem = {
             id: Date.now().toString(),
-            name, surname, post, number
+            name, middlename, surname, number, post, division
         }
 
         //изменяем state
@@ -36,9 +36,11 @@ class NewItem extends React.Component {
 
         this.setState({
             name: "",
+            middlename: "",
             surname: "",
+            number: "",
             post: "",
-            number: ""
+            division: ""            
         })
         
     }
@@ -47,9 +49,11 @@ class NewItem extends React.Component {
         event.persist();
         this.setState( prev => ({...prev, ...{
             [event.target.name]: event.target.value,
+            [event.target.middlename]: event.target.value,
             [event.target.surname]: event.target.value,
-            [event.target.post]: event.target.value,
             [event.target.number]: event.target.value,
+            [event.target.post]: event.target.value,
+            [event.target.division]: event.target.value            
         }}));
     }
 
@@ -62,16 +66,16 @@ class NewItem extends React.Component {
                 value={this.state.name}
                 onChange={this.changeInputHandler}
             />
+            <input type="text" placeholder="Отчество"
+                name="middlename"
+                
+                value={this.state.middlename}
+                onChange={this.changeInputHandler}
+            />
             <input type="text" placeholder="Фамилия"
                 name="surname"
                 
                 value={this.state.surname}
-                onChange={this.changeInputHandler}
-            />
-            <input type="text" placeholder="Должность"
-                name="post"
-                
-                value={this.state.post}
                 onChange={this.changeInputHandler}
             />
             <input type="number" placeholder="Табельный номер"
@@ -80,6 +84,18 @@ class NewItem extends React.Component {
                 value={this.state.number}
                 onChange={this.changeInputHandler}
             />
+            <input type="text" placeholder="Должность"
+                name="post"
+                
+                value={this.state.post}
+                onChange={this.changeInputHandler}
+            />
+            <input type="text" placeholder="Отделение"
+                name="division"
+                
+                value={this.state.division}
+                onChange={this.changeInputHandler}
+            />          
             <Link to="/">Закрыть</Link>
             <button type="submit">Создать</button>
         </form>

@@ -2,10 +2,10 @@ import {CREATE_ITEM, CHANGE_ITEM} from "./types"
 
 const initialState = {
     items: [
-        {id: "123451899367450121", name: "Иван", surname: "Иванов", post:"менеджер", number: 333555},
-        {id: "123899899364440121", name: "Варвара", surname: "Плющ", post:"экономист", number: 895122},
-        {id: "123451899365450100", name: "Семен", surname: "Горбунков", post:"экономист", number: 124899},
-        {id: "125961899365450100", name: "Петр", surname: "Петров", post:"кассир", number: 542303}
+        {id: "123451899367450121", name: "Иван", middlename:"Иванович", surname: "Иванов", number: 333555, post:"менеджер", division: "корпоративный отдел"},
+        {id: "123899899364440121", name: "Варвара", middlename:"Сергеевна", surname: "Плющ", number: 895122, post:"экономист", division: "финансового анализа"},
+        {id: "123451899365450100", name: "Семен", middlename:"Семенович", surname: "Горбунков", number: 124899, post:"экономист", division: "финансового анализа"},
+        {id: "125961899365450100", name: "Петр", middlename:"Петрович", surname: "Петров", number: 542303, post:"кассир", division: "кассовых операций"}
     ]
 };
 

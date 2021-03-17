@@ -26,8 +26,11 @@ function Info({ match }){
             <span style={{margin:"10px"}}>{user.name}</span>
             <input onChange={logging} type="text" style={{margin:"10px"}} />
             <button>изменить имя</button>
+            <span style={{margin:"10px"}}>{user.middlename}</span>
             <span style={{margin:"10px"}}>{user.surname}</span>
             <span style={{margin:"10px"}}>{user.number}</span>
+            <span style={{margin:"10px"}}>{user.post}</span>
+            <span style={{margin:"10px"}}>{user.division}</span>
             <Link to="/">Закрыть</Link>
         </div>
     )
