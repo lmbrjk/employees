@@ -1,18 +1,30 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
 import { connect } from "react-redux"
-import { changeItem } from "../redux/actions"
+import { Link } from "react-router-dom"
 
-function Info({ match, items}){ 
-
-    let userID = match.params.id;
+function Info({ match }){ 
     
-    let user = items.find( item => item.id === +userID);
+    const dispatch = useDispatch();
+
+    const users = useSelector(state => state.items)
+
+    let user = users.items.find( item => item.id === match.params.id);
+
+    const logging = (event) => {
+        const payload = {
+            id: match.params.id,
+            changes: event.target.value
+        };        
+
+        dispatch({type: "CHANGE_ITEM", payload});
+    }
         
     return (
         <div>
             <span style={{margin:"10px"}}>{user.name}</span>
-            <input onChange={changeItem} type="text" style={{margin:"10px"}} />
+            <input onChange={logging} type="text" style={{margin:"10px"}} />
+            <button>изменить имя</button>
             <span style={{margin:"10px"}}>{user.surname}</span>
             <span style={{margin:"10px"}}>{user.number}</span>
             <Link to="/">Закрыть</Link>
@@ -20,17 +32,4 @@ function Info({ match, items}){
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        // присваиваем items значение из стейта state.items.items
-        items: state.items.items
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        changeItem: (event) => dispatch(changeItem(event.target.value))
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Info);
+export default connect()(Info);
