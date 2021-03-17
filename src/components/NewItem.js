@@ -1,6 +1,6 @@
 import React from "react"
-import {connect} from "react-redux"
-import {createItem} from "../redux/actions"
+import { connect } from "react-redux"
+import { createItem } from "../redux/actions"
 import { Link } from "react-router-dom"
 
 class NewItem extends React.Component {
@@ -10,16 +10,19 @@ class NewItem extends React.Component {
 
         this.state = {
             name: "",
+            middlename: "",
             surname: "",
+            birthday: "",
+            number: "",
             post: "",
-            number: ""
+            division: ""   
         };
     }
 
     submitHandler = event => {
         event.preventDefault();
 
-        const {name, middlename, surname, number, post, division} = this.state;
+        const {name, middlename, surname, birthday, number, post, division} = this.state;
 
         //небольшая проверка на незаполненные поля
         if(!name.trim() || !middlename.trim() || !surname.trim() || !number.trim() || !post.trim() || !division.trim()){
@@ -28,7 +31,7 @@ class NewItem extends React.Component {
 
         const newItem = {
             id: Date.now().toString(),
-            name, middlename, surname, number, post, division
+            name, middlename, surname, birthday, number, post, division
         }
 
         //изменяем state
@@ -38,6 +41,7 @@ class NewItem extends React.Component {
             name: "",
             middlename: "",
             surname: "",
+            birthday: "",
             number: "",
             post: "",
             division: ""            
@@ -51,6 +55,7 @@ class NewItem extends React.Component {
             [event.target.name]: event.target.value,
             [event.target.middlename]: event.target.value,
             [event.target.surname]: event.target.value,
+            [event.target.birthday]: event.target.value,
             [event.target.number]: event.target.value,
             [event.target.post]: event.target.value,
             [event.target.division]: event.target.value            
@@ -76,6 +81,12 @@ class NewItem extends React.Component {
                 name="surname"
                 
                 value={this.state.surname}
+                onChange={this.changeInputHandler}
+            />
+            <input type="date" placeholder="Дата рождения"
+                name="birthday"
+                
+                value={this.state.birthday}
                 onChange={this.changeInputHandler}
             />
             <input type="number" placeholder="Табельный номер"

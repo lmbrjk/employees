@@ -28,6 +28,7 @@ function Info({ match }){
             <button>изменить имя</button>
             <span style={{margin:"10px"}}>{user.middlename}</span>
             <span style={{margin:"10px"}}>{user.surname}</span>
+            <span style={{margin:"10px"}}>{user.birthday}</span>
             <span style={{margin:"10px"}}>{user.number}</span>
             <span style={{margin:"10px"}}>{user.post}</span>
             <span style={{margin:"10px"}}>{user.division}</span>
