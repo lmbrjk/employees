@@ -1,9 +1,8 @@
 import List from "./components/List"
 import NewItem from "./components/NewItem"
 import Info from "./components/Info"
-
+import ChangeItem from "./components/ChangeItem"
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom"
-
 
 function App() {
   return (
@@ -26,6 +25,7 @@ function App() {
         <Switch>
           <Route path="/new" component={NewItem} />
           <Route path="/info/:id" component={Info} />
+          <Route path="/edit/:id" component={ChangeItem} />
         </Switch>
       </div>
     </div>
