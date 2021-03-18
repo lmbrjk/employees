@@ -16,7 +16,7 @@ export const itemsReducer = (state = initialState, action) => {
         case CHANGE_ITEM:
             return {...state, 
                 items: state.items.map(item => item.id === action.payload.id ?
-                    {...item, name: action.payload.changes} :
+                    {...item, [action.payload.inputName]: action.payload.changes} :
                     item
                 )            
             };

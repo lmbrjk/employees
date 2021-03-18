@@ -12,9 +12,10 @@ function ChangeItem({ match }){
 
     let user = users.items.find( item => item.id === match.params.id);
 
-    const logging = (event) => {
+    const changeInputHandler = (event) => {
         const payload = {
             id: match.params.id,
+            inputName: event.target.name,
             changes: event.target.value
         };        
 
@@ -24,15 +25,55 @@ function ChangeItem({ match }){
     return (
         <div>
             <h1>Изменить информацию о сотруднике</h1>
-            <span style={{margin:"10px"}}>{user.name}</span>
-            <input onChange={logging} type="text" style={{margin:"10px"}} />
-            <button>изменить имя</button>
-            <span style={{margin:"10px"}}>{user.middlename}</span>
-            <span style={{margin:"10px"}}>{user.surname}</span>
-            <span style={{margin:"10px"}}>{user.birthday}</span>
-            <span style={{margin:"10px"}}>{user.number}</span>
-            <span style={{margin:"10px"}}>{user.post}</span>
-            <span style={{margin:"10px"}}>{user.division}</span>
+            <input 
+                onChange={changeInputHandler} 
+                value={user.name} type="text" 
+                style={{margin:"10px"}}
+
+                name="name"
+            />
+            <input 
+                onChange={changeInputHandler} 
+                value={user.middlename} type="text" 
+                style={{margin:"10px"}}
+
+                name="middlename"
+            />
+            <input 
+                onChange={changeInputHandler} 
+                value={user.surname} type="text" 
+                style={{margin:"10px"}}
+
+                name="surname"
+            />
+            <input 
+                onChange={changeInputHandler} 
+                value={user.birthday} type="date" 
+                style={{margin:"10px"}}
+
+                name="birthday"
+            />
+            <input 
+                onChange={changeInputHandler} 
+                value={user.number} type="number" 
+                style={{margin:"10px"}}
+
+                name="number"
+            />
+            <input 
+                onChange={changeInputHandler} 
+                value={user.post} type="text" 
+                style={{margin:"10px"}}
+
+                name="post"
+            />
+            <input 
+                onChange={changeInputHandler} 
+                value={user.division} type="text" 
+                style={{margin:"10px"}}
+
+                name="division"
+            />
             <Link to="/">Закрыть</Link>
         </div>
     )
