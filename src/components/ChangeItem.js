@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,6 +12,12 @@ function ChangeItem({ match }){
 
     let user = users.items.find( item => item.id === match.params.id);
 
+    const [item, changeLocalState] = useState(user);
+
+    const changeInput = (event) => { 
+        changeLocalState( );        
+    }
+
     const changeInputHandler = (event) => {
         const payload = {
             id: match.params.id,
@@ -20,14 +26,15 @@ function ChangeItem({ match }){
         };        
 
         dispatch({type: "CHANGE_ITEM", payload});
-    }
+    }    
         
     return (
         <div>
             <h1>Изменить информацию о сотруднике</h1>
+            <span></span>
             <input 
-                onChange={changeInputHandler} 
-                value={user.name} type="text" 
+                onChange={changeInput} 
+                value={item.name} type="text" 
                 style={{margin:"10px"}}
 
                 name="name"
@@ -74,7 +81,8 @@ function ChangeItem({ match }){
 
                 name="division"
             />
-            <Link to="/">Закрыть</Link>
+            <button>Сохранить и выйти</button>
+            <Link to="/">Выйти без изенений</Link>
         </div>
     )
 }

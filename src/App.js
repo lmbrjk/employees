@@ -13,10 +13,8 @@ function App() {
       </header>
       <div className="container">
         <div className="container__main">
-          <h1>Список сотрудников</h1>
-          <ul>
-            <List />
-          </ul>
+          <h1>Список сотрудников</h1>          
+          <List />          
           <button>
             <Link to="/new">Создать</Link>
           </button>

@@ -9,7 +9,11 @@ const Items = ({ items }) => {
         return <p>Сотрудников нет</p>
     }
 
-    return items.map( (item, index) => <ListItem item={item} key={index} index={index} />);
+    return (
+        <ul>
+            {items.map( (item, index) => <ListItem item={item} key={index} index={index} />)}
+        </ul>
+    );
 }
 
 const mapStateToProps = state => {
