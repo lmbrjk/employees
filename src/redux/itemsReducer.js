@@ -13,12 +13,23 @@ export const itemsReducer = (state = initialState, action) => {
     switch (action.type){
         case CREATE_ITEM:
             return { ...state, items: state.items.concat([action.payload]) };
+
+        /*
+        STATE изменяется непосредственно при изменениях в инпуте
+
         case CHANGE_ITEM:
             return {...state, 
                 items: state.items.map(item => item.id === action.payload.id ?
                     {...item, [action.payload.inputName]: action.payload.changes} :
                     item
                 )            
+            };
+        */
+        case CHANGE_ITEM:
+            return {...state, 
+                items: state.items.map(item => item.id === action.payload.id 
+                ? action.payload.item 
+                : item)                 
             };
         default: return state;
     }

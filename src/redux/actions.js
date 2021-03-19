@@ -7,9 +7,16 @@ export function createItem(item){
     };
 }
 
-export function changeItem({id, inputName, changes}){
+export function changeItem({id, item}){
     return {
         type: CHANGE_ITEM,
-        id, inputName, changes
+        id, item
     };
 }
+
+// export function changeItem({id, inputName, changes}){
+//     return {
+//         type: CHANGE_ITEM,
+//         id, inputName, changes
+//     };
+// }
