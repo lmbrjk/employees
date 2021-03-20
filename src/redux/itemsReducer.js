@@ -15,10 +15,9 @@ export const itemsReducer = (state = initialState, action) => {
             return { ...state, items: state.items.concat([action.payload]) };
         case CHANGE_ITEM:
             return {...state, 
-                items: state.items.map(item => item.id === action.payload.id ?
-                    {...item, name: action.payload.changes} :
-                    item
-                )            
+                items: state.items.map(item => item.id === action.payload.id 
+                ? action.payload.item 
+                : item)                 
             };
         default: return state;
     }

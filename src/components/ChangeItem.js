@@ -1,9 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
-
+//init
 function ChangeItem({ match }){ 
     
     const dispatch = useDispatch();
@@ -12,28 +12,85 @@ function ChangeItem({ match }){
 
     let user = users.items.find( item => item.id === match.params.id);
 
-    const logging = (event) => {
+    const [item, setLocalState] = useState(user);
+
+    const changeInput = (event) => { 
+        setLocalState(
+            item => (
+                {...item, 
+                ...{[event.target.name]: event.target.value}
+                }
+            )
+        );        
+    }
+
+    const pushChanges = (event) => {
+        event.preventDefault();
+
         const payload = {
             id: match.params.id,
-            changes: event.target.value
-        };        
+            item
+        };  
 
         dispatch({type: "CHANGE_ITEM", payload});
     }
-        
+
     return (
         <div>
             <h1>Изменить информацию о сотруднике</h1>
-            <span style={{margin:"10px"}}>{user.name}</span>
-            <input onChange={logging} type="text" style={{margin:"10px"}} />
-            <button>изменить имя</button>
-            <span style={{margin:"10px"}}>{user.middlename}</span>
-            <span style={{margin:"10px"}}>{user.surname}</span>
-            <span style={{margin:"10px"}}>{user.birthday}</span>
-            <span style={{margin:"10px"}}>{user.number}</span>
-            <span style={{margin:"10px"}}>{user.post}</span>
-            <span style={{margin:"10px"}}>{user.division}</span>
-            <Link to="/">Закрыть</Link>
+            <form onSubmit={pushChanges}>
+                <input 
+                    onChange={changeInput} 
+                    value={item.name} type="text" 
+                    style={{margin:"10px"}}
+
+                    name="name"
+                />
+                <input 
+                    onChange={changeInput} 
+                    value={item.middlename} type="text" 
+                    style={{margin:"10px"}}
+
+                    name="middlename"
+                />
+                <input 
+                    onChange={changeInput} 
+                    value={item.surname} type="text" 
+                    style={{margin:"10px"}}
+
+                    name="surname"
+                />
+                <input 
+                    onChange={changeInput} 
+                    value={item.birthday} type="date" 
+                    style={{margin:"10px"}}
+
+                    name="birthday"
+                />
+                <input 
+                    onChange={changeInput} 
+                    value={item.number} type="number" 
+                    style={{margin:"10px"}}
+
+                    name="number"
+                />
+                <input 
+                    onChange={changeInput} 
+                    value={item.post} type="text" 
+                    style={{margin:"10px"}}
+
+                    name="post"
+                />
+                <input 
+                    onChange={changeInput} 
+                    value={item.division} type="text" 
+                    style={{margin:"10px"}}
+
+                    name="division"
+                />
+                <button type="submit">Сохранить и выйти</button>
+            </form>
+            <Link to="/">Выйти без изенений</Link>
         </div>
     )
 }
