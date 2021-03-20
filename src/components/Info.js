@@ -7,18 +7,16 @@ function Info({ match }){
 
     const users = useSelector(state => state.items)
 
-    let user = users.items.find( item => item.id === match.params.id);
+    const user = users.items.find( item => item.id === match.params.id);
         
     return (
         <div>
             <h1>Информация о сотруднике</h1>
-            <span style={{margin:"10px"}}>{user.name}</span>
-            <span style={{margin:"10px"}}>{user.middlename}</span>
-            <span style={{margin:"10px"}}>{user.surname}</span>
-            <span style={{margin:"10px"}}>{user.birthday}</span>
-            <span style={{margin:"10px"}}>{user.number}</span>
-            <span style={{margin:"10px"}}>{user.post}</span>
-            <span style={{margin:"10px"}}>{user.division}</span>
+            { 
+                Object.values(user).map( field => 
+                    <span style={{margin:"10px"}}>{field}</span>
+                )
+            }
             <Link to="/">Закрыть</Link>
             <Link to={"/edit/" + match.params.id}>Изменить</Link>
         </div>
