@@ -35,17 +35,6 @@ function ChangeItem({ match }){
         dispatch({type: "CHANGE_ITEM", payload});
     }
 
-    //  STATE изменяется непосредственно при изменениях в инпуте
-    // const changeInputHandler = (event) => {
-    //     const payload = {
-    //         id: match.params.id,
-    //         inputName: event.target.name,
-    //         changes: event.target.value
-    //     };        
-
-    //     dispatch({type: "CHANGE_ITEM", payload});
-    // }    
-        
     return (
         <div>
             <h1>Изменить информацию о сотруднике</h1>
