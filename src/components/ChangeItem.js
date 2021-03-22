@@ -3,14 +3,12 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
-//init
 function ChangeItem({ match }){ 
     
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const inputs = useSelector(state => state.fields.inputs);
-    //const inputs = useSelector(state => state.fields.inputs.filter(input => input.hidden == false));
 
     const [item, setLocalState] = useState(user);
 
