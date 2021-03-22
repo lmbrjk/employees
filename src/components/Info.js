@@ -5,15 +5,19 @@ import { useSelector } from 'react-redux'
 
 function Info({ match }){     
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
-    const fields = useSelector(state => state.fields.hidden);
+    const fields = useSelector(state => state.fields.inputs);
  
     return (
         <div>
             <h1>Информация о сотруднике</h1>
             {
-                Object.keys(user).map(key => (
-                    !fields.includes(key) ? <span style={{margin:"10px"}}>{user[key]}</span>
-                    : false
+                fields.map(field => (
+                    field.hidden === false ?
+                        <label>
+                            {field.labelField}
+                            <span>{user[field.nameField]}</span>
+                        </label>
+                        : false
                 ))
             }
             <Link to="/">Закрыть</Link>
