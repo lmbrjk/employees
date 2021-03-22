@@ -1,7 +1,8 @@
 import {CHANGE_FIELDS_LIST} from "./types"
 
 const initialState = {
-    fields: ["name", "middlename", "surname", "birthday", "number", "post", "division"]
+    all: ["name", "middlename", "surname", "birthday", "number", "post", "division"],
+    hidden: ["id", "post"]
 };
 
 export const fieldsReducer = (state = initialState, action) => {
