@@ -4,18 +4,25 @@ import { connect } from "react-redux"
 import { useSelector } from 'react-redux'
 
 function Info({ match }){ 
+    const id = match.params.id;
+    const user = useSelector(state => state.items[items.id]);
+    const fields = useSelector(state => state.fields);
 
-    const users = useSelector(state => state.items)
+    //const user = users.items.find( item => item.id === match.params.id);
+    
+    // let userS = Object.entries(user).filter( item => Object.keys(item).)
+    // console.log(userS);
 
-    const user = users.items.find( item => item.id === match.params.id);
+    //.filter( field => fields.includs(field));
         
     return (
         <div>
             <h1>Информация о сотруднике</h1>
             { 
-                Object.values(user).map( field => 
-                    <span style={{margin:"10px"}}>{field}</span>
-                )
+                console.log(user)
+                // Object.values(user).map( field => 
+                //     <span style={{margin:"10px"}}>{field}</span>
+                // )
             }
             <Link to="/">Закрыть</Link>
             <Link to={"/edit/" + match.params.id}>Изменить</Link>

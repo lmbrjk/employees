@@ -1,4 +1,4 @@
-import {CREATE_ITEM, CHANGE_ITEM} from "./types"
+import {CREATE_ITEM, CHANGE_ITEM, CHANGE_FIELDS_LIST} from "./types"
 
 export function createItem(item){
     return {
@@ -14,9 +14,9 @@ export function changeItem({id, item}){
     };
 }
 
-// export function changeItem({id, inputName, changes}){
-//     return {
-//         type: CHANGE_ITEM,
-//         id, inputName, changes
-//     };
-// }
+export function changeFieldsList({field}){
+    return {
+        type: CHANGE_FIELDS_LIST,
+        field
+    };
+}
