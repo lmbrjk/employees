@@ -3,6 +3,9 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
+import Button from '@material-ui/core/Button';
+
+
 function NewItem() {
 
     const dispatch = useDispatch();
@@ -94,12 +97,12 @@ function NewItem() {
                         
                 ))             
             }
-            <Link to="/">
-                <button type="submit">Сохранить и вернуться в список</button>
-            </Link>
-            <Link to="/new">
-                <button type="submit">Сохранить и добавить еще</button>
-            </Link>
+            <Button type="submit" component={ Link } to="/" variant="contained" color="primary">
+                Сохранить и вернуться в список
+            </Button>
+            <Button type="submit" component={ Link } to="/new" variant="contained" color="primary">
+                Сохранить и добавить еще
+            </Button>
         </form>
     )
 }
