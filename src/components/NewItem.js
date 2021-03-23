@@ -3,6 +3,9 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
+import { useFormik, Formik, Field, Form } from 'formik';
+
+
 import Button from '@material-ui/core/Button';
 
 
@@ -16,47 +19,17 @@ function NewItem() {
 
     const [item, setLocalState] = useState({});
     
-
-    // submitHandler = event => {
-    //     event.preventDefault();
-
-    //     const {name, middlename, surname, birthday, number, post, division} = this.state;
-
-    //     //небольшая проверка на незаполненные поля
-    //     if(!name.trim() || !middlename.trim() || !surname.trim() || !number.trim() || !post.trim() || !division.trim()){
-    //         return
-    //     }
-
-    //     const newItem = {
-    //         id: Date.now().toString(),
-    //         name, middlename, surname, birthday, number, post, division
-    //     }
-
-    //     //изменяем state
-    //     this.props.createItem(newItem);
-
-    //     this.setState({
-    //         name: "",
-    //         middlename: "",
-    //         surname: "",
-    //         birthday: "",
-    //         number: "",
-    //         post: "",
-    //         division: ""            
-    //     })
         
-    // }
-
-    // const changeInput = (event) => {       
-    //     setLocalInputs( 
-    //         item => (
-    //             {...item, 
-    //             ...{[event.target.name]: event.target.value}
-    //             }
-    //         )
-    //     );
-    // }
-
+    const inputsNames = inputs.map(item => item.nameField);
+    
+    const formik = useFormik({
+        initialValues: {},
+        onSubmit: values => {
+            console.log(values)
+        },
+    });
+    
+    
     const changeInput = (event) => { 
         setLocalState(
             item => (
@@ -80,30 +53,39 @@ function NewItem() {
 
     
     return (
-        <form onSubmit={pushItem}>
-            { 
-                inputs.map(input => (
-                    
-                    <label>
-                        {input.labelField}
-                        <input
-                            onChange={changeInput} 
-                            type={input.typeField}
-                            name={input.nameField}
+        
+            
+                
+                <form onSubmit={formik.handleSubmit}>
+                    {
+                        inputs.map(input => (
+                            
+                            <label>
+                                {input.labelField}
+                                <input
+                                    onChange={formik.handleSubmit} 
+                                    type={input.typeField}
+                                    name={input.nameField}
+                                   
 
-                            style={{margin:"10px"}}                                
-                        />
-                    </label>
-                        
-                ))             
-            }
-            <Button type="submit" component={ Link } to="/" variant="contained" color="primary">
-                Сохранить и вернуться в список
-            </Button>
-            <Button type="submit" component={ Link } to="/new" variant="contained" color="primary">
-                Сохранить и добавить еще
-            </Button>
-        </form>
+                                    id={input.nameField}
+                                    style={{margin:"10px"}}                                
+                                />
+                            </label>
+                                
+                        )) 
+                    }
+                    <Button type="submit" component={ Link } to="/" variant="contained" color="primary">
+                        Сохранить и вернуться в список
+                    </Button>
+                    <Button type="submit" component={ Link } to="/new" variant="contained" color="primary">
+                        Сохранить и добавить еще
+                    </Button>
+                </form>
+            
+            
+            
+        
     )
 }
 
