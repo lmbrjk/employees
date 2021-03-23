@@ -3,19 +3,22 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector } from 'react-redux'
 
-function Info({ match }){ 
-
-    const users = useSelector(state => state.items)
-
-    const user = users.items.find( item => item.id === match.params.id);
-        
+function Info({ match }){     
+    const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
+    const fields = useSelector(state => state.fields.inputs);
+ 
     return (
         <div>
             <h1>Информация о сотруднике</h1>
-            { 
-                Object.values(user).map( field => 
-                    <span style={{margin:"10px"}}>{field}</span>
-                )
+            {
+                fields.map(field => (
+                    field.hidden === false ?
+                        <label>
+                            {field.labelField}
+                            <span>{user[field.nameField]}</span>
+                        </label>
+                        : false
+                ))
             }
             <Link to="/">Закрыть</Link>
             <Link to={"/edit/" + match.params.id}>Изменить</Link>

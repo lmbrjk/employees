@@ -1,116 +1,107 @@
-import React from "react"
-import { connect } from "react-redux"
-import { createItem } from "../redux/actions"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { useSelector, useDispatch } from 'react-redux'
 
-class NewItem extends React.Component {
+function NewItem() {
 
-    constructor(props) {
-        super(props);
+    const dispatch = useDispatch();
 
-        this.state = {
-            name: "",
-            middlename: "",
-            surname: "",
-            birthday: "",
-            number: "",
-            post: "",
-            division: ""   
-        };
-    }
+    const allInputs = useSelector(state => state.fields.inputs);
 
-    submitHandler = event => {
-        event.preventDefault();
+    const [inputs] = useState(allInputs.filter(input => input.hidden === false));
 
-        const {name, middlename, surname, birthday, number, post, division} = this.state;
+    const [item, setLocalState] = useState({});
+    
 
-        //небольшая проверка на незаполненные поля
-        if(!name.trim() || !middlename.trim() || !surname.trim() || !number.trim() || !post.trim() || !division.trim()){
-            return
-        }
+    // submitHandler = event => {
+    //     event.preventDefault();
 
-        const newItem = {
-            id: Date.now().toString(),
-            name, middlename, surname, birthday, number, post, division
-        }
+    //     const {name, middlename, surname, birthday, number, post, division} = this.state;
 
-        //изменяем state
-        this.props.createItem(newItem);
+    //     //небольшая проверка на незаполненные поля
+    //     if(!name.trim() || !middlename.trim() || !surname.trim() || !number.trim() || !post.trim() || !division.trim()){
+    //         return
+    //     }
 
-        this.setState({
-            name: "",
-            middlename: "",
-            surname: "",
-            birthday: "",
-            number: "",
-            post: "",
-            division: ""            
-        })
+    //     const newItem = {
+    //         id: Date.now().toString(),
+    //         name, middlename, surname, birthday, number, post, division
+    //     }
+
+    //     //изменяем state
+    //     this.props.createItem(newItem);
+
+    //     this.setState({
+    //         name: "",
+    //         middlename: "",
+    //         surname: "",
+    //         birthday: "",
+    //         number: "",
+    //         post: "",
+    //         division: ""            
+    //     })
         
+    // }
+
+    // const changeInput = (event) => {       
+    //     setLocalInputs( 
+    //         item => (
+    //             {...item, 
+    //             ...{[event.target.name]: event.target.value}
+    //             }
+    //         )
+    //     );
+    // }
+
+    const changeInput = (event) => { 
+        setLocalState(
+            item => (
+                {...item, 
+                ...{[event.target.name]: event.target.value}
+                }
+            )
+        );        
     }
 
-    changeInputHandler = event => {
-        event.persist();
-        this.setState( prev => ({...prev, ...{
-            [event.target.name]: event.target.value,
-            [event.target.middlename]: event.target.value,
-            [event.target.surname]: event.target.value,
-            [event.target.birthday]: event.target.value,
-            [event.target.number]: event.target.value,
-            [event.target.post]: event.target.value,
-            [event.target.division]: event.target.value            
-        }}));
+    const payload = {
+        id: Date.now().toString(),
+        ...item
+    };  
+
+    const pushItem = (event) => {
+        event.preventDefault();        
+
+        dispatch({type: "CREATE_ITEM", payload});
     }
 
-    render() {
-        return (
-        <form onSubmit={this.submitHandler}>
-            <input type="text" placeholder="Имя"
-                name="name"
-                
-                value={this.state.name}
-                onChange={this.changeInputHandler}
-            />
-            <input type="text" placeholder="Отчество"
-                name="middlename"
-                
-                value={this.state.middlename}
-                onChange={this.changeInputHandler}
-            />
-            <input type="text" placeholder="Фамилия"
-                name="surname"
-                
-                value={this.state.surname}
-                onChange={this.changeInputHandler}
-            />
-            <input type="date" placeholder="Дата рождения"
-                name="birthday"
-                
-                value={this.state.birthday}
-                onChange={this.changeInputHandler}
-            />
-            <input type="number" placeholder="Табельный номер"
-                name="number"
-                
-                value={this.state.number}
-                onChange={this.changeInputHandler}
-            />
-            <input type="text" placeholder="Должность"
-                name="post"
-                
-                value={this.state.post}
-                onChange={this.changeInputHandler}
-            />
-            <input type="text" placeholder="Отделение"
-                name="division"
-                
-                value={this.state.division}
-                onChange={this.changeInputHandler}
-            />          
-            <Link to="/">Закрыть</Link>
-            <button type="submit">Создать</button>
+    
+    return (
+        <form onSubmit={pushItem}>
+            { 
+                inputs.map(input => (
+                    
+                    <label>
+                        {input.labelField}
+                        <input
+                            onChange={changeInput} 
+                            type={input.typeField}
+                            name={input.nameField}
+
+                            style={{margin:"10px"}}                                
+                        />
+                    </label>
+                        
+                ))             
+            }
+            <Link to="/">
+                <button type="submit">Сохранить и вернуться в список</button>
+            </Link>
+            <Link to="/new">
+                <button type="submit">Сохранить и добавить еще</button>
+            </Link>
         </form>
-    )}
+    )
 }
 
-export default connect(null, {createItem})(NewItem)
+export default connect()(NewItem)
