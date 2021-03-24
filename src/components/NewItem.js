@@ -25,55 +25,58 @@ function NewItem(props) {
     const [inputs] = useState(allInputs.filter(input => input.hidden === false));
 
     return (
-        <Form 
-            validate={validate}
-            onSubmit={(formData) => {
+        <div>
+            <h1>Добавить сотрудника</h1> 
+            <Form 
+                validate={validate}
+                onSubmit={(formData) => {
 
-                const payload = {
-                    id: Date.now().toString(),
-                    ...formData
-                }; 
-                
-                dispatch({type: "CREATE_ITEM", payload});
+                    const payload = {
+                        id: Date.now().toString(),
+                        ...formData
+                    }; 
+                    
+                    dispatch({type: "CREATE_ITEM", payload});
 
-            }}
-            render = {({ handleSubmit, form }) => (
-                <form onSubmit={ 
-                    //необходимо для очистки полей после записи в redux
-                    async (event) => {
-                        await handleSubmit(event);
-                        
-                        event.nativeEvent.submitter.name == "back"
-                            // при нажатии на кнопку Сохранить и вернуться в список                 
-                            ? props.history.push('/')
-                            // при нажатии на кнопку Сохранить и добавить еще
-                            : form.reset() ;                        
-                    }
-                }>
-                    { 
-                        inputs.map(input => (
+                }}
+                render = {({ handleSubmit, form }) => (
+                    <form onSubmit={ 
+                        //необходимо для очистки полей после записи в redux
+                        async (event) => {
+                            await handleSubmit(event);
+                            
+                            event.nativeEvent.submitter.name == "back"
+                                // при нажатии на кнопку "Сохранить и вернуться в список "                
+                                ? props.history.push('/')
+                                // при нажатии на кнопку "Сохранить и добавить еще"
+                                : form.reset() ;                        
+                        }
+                    }>
+                        { 
+                            inputs.map(input => (
 
-                            <div style={{margin:"10px"}}>
-                                <label>{input.labelField}</label>
-                                <Field
-                                    type={input.typeField}
-                                    name={input.nameField}
-                                    component="input"                                    
-                                />
-                            </div>
-                                
-                        ))             
-                    }
-                    <Button name="back" type="submit" variant="contained" color="primary">
-                        Сохранить и вернуться в список
-                    </Button>
-                    <Button name="more" type="submit" variant="contained" color="primary">
-                        Сохранить и добавить еще
-                    </Button>
-                </form>
-            )}
-        />
-        
+                                <div style={{margin:"10px"}}>
+                                    <label>{input.labelField}
+                                        <Field
+                                            type={input.typeField}
+                                            name={input.nameField}
+                                            component="input"                                    
+                                        />
+                                    </label>
+                                </div>
+                                    
+                            ))             
+                        }
+                        <Button name="back" type="submit" variant="contained" color="primary">
+                            Сохранить и вернуться в список
+                        </Button>
+                        <Button name="more" type="submit" variant="contained" color="primary">
+                            Сохранить и добавить еще
+                        </Button>
+                    </form>
+                )}
+            />
+        </div>        
     )
 }
 

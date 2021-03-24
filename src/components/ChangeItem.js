@@ -26,19 +26,7 @@ function ChangeItem({ match }){
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const inputs = useSelector(state => state.fields.inputs);
 
-    const [item, setLocalState] = useState(user);
-
-    // const changeInput = (event) => { 
-    //     setLocalState(
-    //         item => (
-    //             {...item, 
-    //             ...{[event.target.name]: event.target.value}
-    //             }
-    //         )
-    //     );        
-    // }   
-    
-    const id = match.params.id;
+    const [item] = useState(user);    
 
     return (
 
@@ -46,33 +34,34 @@ function ChangeItem({ match }){
             <h1>Изменить информацию о сотруднике</h1>            
             <Form
                 validate={validate}
+                //чтобы поля были заполнены текущими значениями (до изменения)
+                initialValues={item}
+
                 onSubmit={(formData) => {
 
                     const payload = {
+                        // взят из локального стейта
                         id: item.id,
+                        // пришло из формы
                         ...formData 
-                    };  
-                    
-                    console.log(payload)
+                    }; 
+
                     dispatch({type: "CHANGE_ITEM", payload});
 
                 }}
                 render = {({ handleSubmit }) => (
-                    <form onSubmit={ async () => {
-                        await handleSubmit;} 
-                    }>
+                    <form onSubmit={ handleSubmit }>
                         { 
                             inputs.map(input => (
 
                                 <div style={{margin:"10px"}}>
-                                    <label>{input.labelField}</label>
-                                    <Field
-                                        type={input.typeField}
-                                        name={input.nameField}
-                                        component="input" 
-                                        
-                                        initialValue={item[input.nameField]}
-                                    />
+                                    <label>{input.labelField}
+                                        <Field
+                                            type={input.typeField}
+                                            name={input.nameField}
+                                            component="input" 
+                                        />
+                                    </label>
                                 </div>
                                     
                             ))             
@@ -85,29 +74,7 @@ function ChangeItem({ match }){
                         </Button>
                     </form>
                 )}
-            />
-                {/* <form onSubmit={pushChanges}>
-                    {
-                        inputs.map(input => (
-                            input.hidden === false ?
-                                <label>
-                                    {input.labelField}
-                                    <input
-                                        onChange={changeInput}  
-                                        type={input.typeField}
-                                        name={input.nameField}
-                                        value={item[input.nameField]}
-
-                                        style={{margin:"10px"}}                                
-                                    />
-                                </label>
-                                : false
-                        ))
-                    }
-                    <button type="submit">Сохранить и выйти</button>
-                </form>
-                <Link to="/">Выйти без изменений</Link> */}
-            
+            /> 
         </div>
     )
 }
