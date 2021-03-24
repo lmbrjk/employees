@@ -42,8 +42,6 @@ function NewItem(props) {
                     //необходимо для очистки полей после записи в redux
                     async (event) => {
                         await handleSubmit(event);
-
-                        console.log(event)
                         
                         event.nativeEvent.submitter.name == "back"
                             // при нажатии на кнопку Сохранить и вернуться в список                 
