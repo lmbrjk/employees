@@ -13,13 +13,10 @@ const validate = values => {
     if (!values.surname) {
       errors.surname = 'Поле должно быть заполнено';
     }
-    if (!values.post) {
-      errors.post = 'Поле должно быть заполнено';
-    }
     return errors;
 };
 
-function ChangeItem({ match }, props){ 
+function ChangeItem({ match }){ 
     
     const dispatch = useDispatch();
 
@@ -50,16 +47,7 @@ function ChangeItem({ match }, props){
 
                 }}
                 render = {({ handleSubmit }) => (
-                    <form onSubmit={ 
-                        async (event) => {
-                            await handleSubmit(event);
-                            
-                            event.nativeEvent.submitter.name == "saveAndBack"
-                                // при нажатии на кнопку "Сохранить и вернуться в список "                
-                                ? props.history.push('/')
-                                : false ;
-                        }
-                    }>
+                    <form onSubmit={ handleSubmit }>
                         { 
                             inputs.map(input => (
 
@@ -85,10 +73,7 @@ function ChangeItem({ match }, props){
                             ))             
                         }
                         <Button type="submit" variant="contained" color="primary">
-                            Сохранить
-                        </Button>
-                        <Button name="saveAndBack" type="submit" variant="contained" color="primary">
-                            Сохранить и вернуться в список
+                            Сохранить и выйти
                         </Button>
                         <Button  component={ Link } to="/" variant="contained" color="primary">
                             Выйти без изменений

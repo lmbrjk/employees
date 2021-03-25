@@ -10,9 +10,6 @@ const validate = values => {
     if (!values.surname) {
       errors.surname = 'Поле должно быть заполнено';
     }
-    if (!values.post) {
-      errors.post = 'Поле должно быть заполнено';
-    }
     return errors;
 };
 
@@ -69,9 +66,9 @@ function NewItem(props) {
                                                 : <Field
                                                     type={input.typeField}
                                                     name={input.nameField}
-                                                    component="input"                                    
+                                                    component="input"
                                                   />
-                                            }                                      
+                                            }
                                         
                                     </label>
                                 </div>
