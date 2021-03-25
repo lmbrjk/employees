@@ -9,7 +9,9 @@ const initialState = {
         { typeField: "number", nameField: "number", labelField: "Табельный номер", hidden: false },
         { typeField: "select", nameField: "post", labelField: "Должность", labels: ["менеджер", "кассир", "экономист", "начальник отдела"], hidden: false },
         { typeField: "select", nameField: "division", labelField: "Подразделение", labels: ["кассовых операций", "кредитный отдел", "по работе с юрлицами"], hidden: false }
-    ]
+    ],
+    allFields: ["id", "name", "middlename", "surname", "birthday", "number", "post", "division"],
+    hiddenFields: ["id", "name", "middlename"]
 };
 
 export const fieldsReducer = (state = initialState, action) => {
