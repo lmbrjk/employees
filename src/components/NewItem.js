@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -42,9 +43,9 @@ function NewItem(props) {
                         async (event) => {
                             await handleSubmit(event);
                             
-                            event.nativeEvent.submitter.name == "back"
+                            event.nativeEvent.submitter.name === "back"
                                 // при нажатии на кнопку "Сохранить и вернуться в список "                
-                                ? props.history.push('/')
+                                ? props.history.push('/list/')
                                 // при нажатии на кнопку "Сохранить и добавить еще"
                                 : form.reset() ;                        
                         }
@@ -80,6 +81,9 @@ function NewItem(props) {
                         </Button>
                         <Button name="more" type="submit" variant="contained" color="primary">
                             Сохранить и добавить еще
+                        </Button>
+                        <Button component={ Link } to="/" variant="contained" color="primary">
+                            Закрыть
                         </Button>
                     </form>
                 )}

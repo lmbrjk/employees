@@ -57,15 +57,17 @@ function ChangeItem({ match }){
                                             ? <Field
                                                 type={input.typeField}
                                                 name={input.nameField}
-                                                component="select"                                    
-                                                >
+                                                component="select"
+                                                key={input.nameField}                                    
+                                              >
                                                     {input.labels.map(option => <option value={option}>{option}</option>)}
-                                                </Field>
+                                              </Field>
                                             : <Field
                                                 type={input.typeField}
                                                 name={input.nameField}
-                                                component="input"                                    
-                                                />
+                                                component="input" 
+                                                key={input.nameField}                                   
+                                              />
                                         } 
                                     </label>
                                 </div>
@@ -73,10 +75,10 @@ function ChangeItem({ match }){
                             ))             
                         }
                         <Button type="submit" variant="contained" color="primary">
-                            Сохранить и выйти
+                            Сохранить
                         </Button>
-                        <Button  component={ Link } to="/" variant="contained" color="primary">
-                            Выйти без изменений
+                        <Button  component={ Link } to="/list/" variant="contained" color="primary">
+                            Выйти
                         </Button>
                     </form>
                 )}

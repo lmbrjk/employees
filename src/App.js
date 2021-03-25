@@ -1,10 +1,10 @@
 import List from "./components/List"
 import NewItem from "./components/NewItem"
-import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom"
+import { Switch, Route, Link } from "react-router-dom"
 
 function App() {
   return (
-    <Router>
+    
       <div className="App">
         <header>
           <nav>Навигация</nav>
@@ -19,7 +19,7 @@ function App() {
           </Switch>
         </div>
       </div>
-    </Router>
+    
   );
 }
 
