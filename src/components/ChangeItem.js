@@ -13,9 +13,6 @@ const validate = values => {
     if (!values.surname) {
       errors.surname = 'Поле должно быть заполнено';
     }
-    if (!values.post) {
-      errors.post = 'Поле должно быть заполнено';
-    }
     return errors;
 };
 
@@ -56,11 +53,22 @@ function ChangeItem({ match }){
 
                                 <div style={{margin:"10px"}}>
                                     <label>{input.labelField}
-                                        <Field
-                                            type={input.typeField}
-                                            name={input.nameField}
-                                            component="input" 
-                                        />
+                                        {input.typeField === "select" 
+                                            ? <Field
+                                                type={input.typeField}
+                                                name={input.nameField}
+                                                component="select"
+                                                key={input.nameField}                                    
+                                              >
+                                                    {input.labels.map(option => <option value={option}>{option}</option>)}
+                                              </Field>
+                                            : <Field
+                                                type={input.typeField}
+                                                name={input.nameField}
+                                                component="input" 
+                                                key={input.nameField}                                   
+                                              />
+                                        } 
                                     </label>
                                 </div>
                                     
@@ -69,8 +77,8 @@ function ChangeItem({ match }){
                         <Button type="submit" variant="contained" color="primary">
                             Сохранить
                         </Button>
-                        <Button  component={ Link } to="/" variant="contained" color="primary">
-                            Выйти без изменений
+                        <Button  component={ Link } to="/list/" variant="contained" color="primary">
+                            Выйти
                         </Button>
                     </form>
                 )}

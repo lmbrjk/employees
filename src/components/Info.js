@@ -23,10 +23,10 @@ function Info({ match }){
                 ))
             }
             
-            <Button component={ Link } to="/" variant="contained" color="primary">
+            <Button component={ Link } to="/list/" variant="contained" color="primary">
                 Закрыть
             </Button>
-            <Button component={ Link } to={"/edit/" + match.params.id} variant="contained" color="primary">
+            <Button component={ Link } to={"/list/edit/" + match.params.id} variant="contained" color="primary">
                 Изменить
             </Button>
         </div>
