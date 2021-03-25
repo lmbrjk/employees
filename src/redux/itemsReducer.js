@@ -16,7 +16,7 @@ export const itemsReducer = (state = initialState, action) => {
         case CHANGE_ITEM:
             return {...state, 
                 items: state.items.map(item => item.id === action.payload.id 
-                ? action.payload.item 
+                ? action.payload
                 : item)                 
             };
         default: return state;

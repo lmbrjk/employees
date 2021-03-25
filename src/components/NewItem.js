@@ -1,12 +1,22 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
+import { Field, Form } from "react-final-form"
 import Button from '@material-ui/core/Button';
 
+const validate = values => {
+    const errors = {};
+    if (!values.surname) {
+      errors.surname = 'Поле должно быть заполнено';
+    }
+    if (!values.post) {
+      errors.post = 'Поле должно быть заполнено';
+    }
+    return errors;
+};
 
-function NewItem() {
+function NewItem(props) {
 
     const dispatch = useDispatch();
 
@@ -14,96 +24,59 @@ function NewItem() {
 
     const [inputs] = useState(allInputs.filter(input => input.hidden === false));
 
-    const [item, setLocalState] = useState({});
-    
-
-    // submitHandler = event => {
-    //     event.preventDefault();
-
-    //     const {name, middlename, surname, birthday, number, post, division} = this.state;
-
-    //     //небольшая проверка на незаполненные поля
-    //     if(!name.trim() || !middlename.trim() || !surname.trim() || !number.trim() || !post.trim() || !division.trim()){
-    //         return
-    //     }
-
-    //     const newItem = {
-    //         id: Date.now().toString(),
-    //         name, middlename, surname, birthday, number, post, division
-    //     }
-
-    //     //изменяем state
-    //     this.props.createItem(newItem);
-
-    //     this.setState({
-    //         name: "",
-    //         middlename: "",
-    //         surname: "",
-    //         birthday: "",
-    //         number: "",
-    //         post: "",
-    //         division: ""            
-    //     })
-        
-    // }
-
-    // const changeInput = (event) => {       
-    //     setLocalInputs( 
-    //         item => (
-    //             {...item, 
-    //             ...{[event.target.name]: event.target.value}
-    //             }
-    //         )
-    //     );
-    // }
-
-    const changeInput = (event) => { 
-        setLocalState(
-            item => (
-                {...item, 
-                ...{[event.target.name]: event.target.value}
-                }
-            )
-        );        
-    }
-
-    const payload = {
-        id: Date.now().toString(),
-        ...item
-    };  
-
-    const pushItem = (event) => {
-        event.preventDefault();        
-
-        dispatch({type: "CREATE_ITEM", payload});
-    }
-
-    
     return (
-        <form onSubmit={pushItem}>
-            { 
-                inputs.map(input => (
-                    
-                    <label>
-                        {input.labelField}
-                        <input
-                            onChange={changeInput} 
-                            type={input.typeField}
-                            name={input.nameField}
+        <div>
+            <h1>Добавить сотрудника</h1> 
+            <Form 
+                validate={validate}
+                onSubmit={(formData) => {
 
-                            style={{margin:"10px"}}                                
-                        />
-                    </label>
-                        
-                ))             
-            }
-            <Button type="submit" component={ Link } to="/" variant="contained" color="primary">
-                Сохранить и вернуться в список
-            </Button>
-            <Button type="submit" component={ Link } to="/new" variant="contained" color="primary">
-                Сохранить и добавить еще
-            </Button>
-        </form>
+                    const payload = {
+                        id: Date.now().toString(),
+                        ...formData
+                    }; 
+                    
+                    dispatch({type: "CREATE_ITEM", payload});
+
+                }}
+                render = {({ handleSubmit, form }) => (
+                    <form onSubmit={ 
+                        //необходимо для очистки полей после записи в redux
+                        async (event) => {
+                            await handleSubmit(event);
+                            
+                            event.nativeEvent.submitter.name == "back"
+                                // при нажатии на кнопку "Сохранить и вернуться в список "                
+                                ? props.history.push('/')
+                                // при нажатии на кнопку "Сохранить и добавить еще"
+                                : form.reset() ;                        
+                        }
+                    }>
+                        { 
+                            inputs.map(input => (
+
+                                <div style={{margin:"10px"}}>
+                                    <label>{input.labelField}
+                                        <Field
+                                            type={input.typeField}
+                                            name={input.nameField}
+                                            component="input"                                    
+                                        />
+                                    </label>
+                                </div>
+                                    
+                            ))             
+                        }
+                        <Button name="back" type="submit" variant="contained" color="primary">
+                            Сохранить и вернуться в список
+                        </Button>
+                        <Button name="more" type="submit" variant="contained" color="primary">
+                            Сохранить и добавить еще
+                        </Button>
+                    </form>
+                )}
+            />
+        </div>        
     )
 }
 
