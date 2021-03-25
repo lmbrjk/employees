@@ -19,7 +19,7 @@ const validate = values => {
     return errors;
 };
 
-function ChangeItem({ match }){ 
+function ChangeItem({ match }, props){ 
     
     const dispatch = useDispatch();
 
@@ -50,17 +50,35 @@ function ChangeItem({ match }){
 
                 }}
                 render = {({ handleSubmit }) => (
-                    <form onSubmit={ handleSubmit }>
+                    <form onSubmit={ 
+                        async (event) => {
+                            await handleSubmit(event);
+                            
+                            event.nativeEvent.submitter.name == "saveAndBack"
+                                // при нажатии на кнопку "Сохранить и вернуться в список "                
+                                ? props.history.push('/')
+                                : false ;
+                        }
+                    }>
                         { 
                             inputs.map(input => (
 
                                 <div style={{margin:"10px"}}>
                                     <label>{input.labelField}
-                                        <Field
-                                            type={input.typeField}
-                                            name={input.nameField}
-                                            component="input" 
-                                        />
+                                        {input.typeField === "select" 
+                                            ? <Field
+                                                type={input.typeField}
+                                                name={input.nameField}
+                                                component="select"                                    
+                                                >
+                                                    {input.labels.map(option => <option value={option}>{option}</option>)}
+                                                </Field>
+                                            : <Field
+                                                type={input.typeField}
+                                                name={input.nameField}
+                                                component="input"                                    
+                                                />
+                                        } 
                                     </label>
                                 </div>
                                     
@@ -68,6 +86,9 @@ function ChangeItem({ match }){
                         }
                         <Button type="submit" variant="contained" color="primary">
                             Сохранить
+                        </Button>
+                        <Button name="saveAndBack" type="submit" variant="contained" color="primary">
+                            Сохранить и вернуться в список
                         </Button>
                         <Button  component={ Link } to="/" variant="contained" color="primary">
                             Выйти без изменений

@@ -56,12 +56,23 @@ function NewItem(props) {
                             inputs.map(input => (
 
                                 <div style={{margin:"10px"}}>
-                                    <label>{input.labelField}
-                                        <Field
-                                            type={input.typeField}
-                                            name={input.nameField}
-                                            component="input"                                    
-                                        />
+                                    <label>{input.labelField}                                        
+                                            
+                                            {input.typeField === "select" 
+                                                ? <Field
+                                                    type={input.typeField}
+                                                    name={input.nameField}
+                                                    component="select"                                    
+                                                  >
+                                                      {input.labels.map(option => <option value={option}>{option}</option>)}
+                                                  </Field>
+                                                : <Field
+                                                    type={input.typeField}
+                                                    name={input.nameField}
+                                                    component="input"                                    
+                                                  />
+                                            }                                      
+                                        
                                     </label>
                                 </div>
                                     
