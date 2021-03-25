@@ -12,30 +12,30 @@ function Settings(){
 
 
 
-    const changeInput = (event) => { 
-        setLocalState(
-            item => (
-                {...item, 
-                ...{[event.target.name]: event.target.value}
-                }
-            )
-        );        
-    }
+    // const changeInput = (event) => { 
+    //     setLocalState(
+    //         item => (
+    //             {...item, 
+    //             ...{[event.target.name]: event.target.value}
+    //             }
+    //         )
+    //     );        
+    // }
 
-    const pushChanges = (event) => {
-        event.preventDefault();
+    // const pushChanges = (event) => {
+    //     event.preventDefault();
 
-        const payload = {
-            id: match.params.id,
-            item
-        };  
+    //     const payload = {
+    //         id: match.params.id,
+    //         item
+    //     };  
 
-        dispatch({type: "CHANGE_ITEM", payload});
-    }
+    //     dispatch({type: "CHANGE_ITEM", payload});
+    // }
 
     return (
         <div>
-            <h1>Изменить информацию о сотруднике</h1>
+            <h1>Настройки</h1>
             <form>
                 <label></label>
             </form>
@@ -44,4 +44,4 @@ function Settings(){
     )
 }
 
-export default connect()(ChangeItem);
+export default connect()(Settings);
