@@ -20,9 +20,9 @@ export function changeItem({id, item}){
 //     };
 // }
 
-export function changeFieldsList({fields}){
+export function changeFieldsList(hiddenFields){
     return {
         type: CHANGE_FIELDS_LIST,
-        fields
+        hiddenFields
     };
 }

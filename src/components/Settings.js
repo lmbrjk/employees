@@ -57,13 +57,11 @@ function Settings(){
 
                 onSubmit={(formData) => {
                     
-                    // const payload = {
-                    //     id: Date.now().toString(),
-                    //     ...formData
-                    // }; 
+                    const payload = {
+                        hiddenFields: Object.values(formData)
+                    };
                     
-                    dispatch({type: "CHANGE_FIELDS_LIST", ...Object.values(formData)});
-                    console.log(...Object.values(formData))
+                    dispatch({type: "CHANGE_FIELDS_LIST", payload});
                 }}
                 render = {({ handleSubmit }) => (
                     <form onSubmit={ handleSubmit }>

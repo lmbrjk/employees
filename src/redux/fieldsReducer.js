@@ -25,7 +25,16 @@ const initialState = {
 export const fieldsReducer = (state = initialState, action) => {
     switch (action.type){
         case CHANGE_FIELDS_LIST:
-            return { ...state, fields: state.fields };
+            const stateCopy = {...state};
+
+            stateCopy.allFields.map( field => 
+                action.payload.hiddenFields[0].includes(field.name)
+                ? field.hidden = true
+                : field
+            ) 
+            console.log(action)
+            // console.log(action.payload)
+            return stateCopy;
         default: return state;
     }
 }
