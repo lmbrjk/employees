@@ -26,7 +26,6 @@ function Settings(){
     return (
         <div>
             <h1>Настройки</h1>
-            {console.log(initialValues)}
             <Form
                 // определяем напротив каких свойств будет стоять галка при загрузке
                 // свойство fields указано во всех чекбоксах name="fields"
