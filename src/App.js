@@ -3,6 +3,8 @@ import List from "./components/List"
 import NewItem from "./components/NewItem"
 import Settings from "./components/Settings"
 
+import Container from '@material-ui/core/Container';
+
 function App() {
   return (
     
@@ -13,13 +15,13 @@ function App() {
           <Link to="/new">Создать</Link>
           <Link to="/settings">Настройки</Link>
         </header>
-        <div className="container">        
+        <Container maxWidth="sm">        
           <Switch>
             <Route path="/list" component={ List } /> 
             <Route path="/new" component={ NewItem } />
             <Route path="/settings" component={ Settings } />
           </Switch>
-        </div>
+        </Container>
       </div>
     
   );
