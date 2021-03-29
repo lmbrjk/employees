@@ -51,22 +51,22 @@ function ChangeItem({ match }){
                         { 
                             inputs.map(input => (
 
-                                <div style={{margin:"10px"}}>
+                                <div style={{margin:"10px"}} key={input.nameField}>
                                     <label>{input.labelField}
                                         {input.typeField === "select" 
                                             ? <Field
                                                 type={input.typeField}
                                                 name={input.nameField}
                                                 component="select"
-                                                key={input.nameField}                                    
+                                                                                    
                                               >
-                                                    {input.labels.map(option => <option value={option}>{option}</option>)}
+                                                    {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
                                               </Field>
                                             : <Field
                                                 type={input.typeField}
                                                 name={input.nameField}
                                                 component="input" 
-                                                key={input.nameField}                                   
+                                                                               
                                               />
                                         } 
                                     </label>

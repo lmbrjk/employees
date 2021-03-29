@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
@@ -18,9 +18,7 @@ function NewItem(props) {
 
     const dispatch = useDispatch();
 
-    const allInputs = useSelector(state => state.fields.inputs);
-
-    const [inputs] = useState(allInputs.filter(input => input.hidden === false));
+    const inputs = useSelector(state => state.fields.inputs);
 
     return (
         <div>
@@ -53,7 +51,7 @@ function NewItem(props) {
                         { 
                             inputs.map(input => (
 
-                                <div style={{margin:"10px"}}>
+                                <div key={input.nameField} style={{margin:"10px"}}>
                                     <label>{input.labelField}                                        
                                             
                                             {input.typeField === "select" 
@@ -62,7 +60,7 @@ function NewItem(props) {
                                                     name={input.nameField}
                                                     component="select"                                    
                                                   >
-                                                      {input.labels.map(option => <option value={option}>{option}</option>)}
+                                                      {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
                                                   </Field>
                                                 : <Field
                                                     type={input.typeField}

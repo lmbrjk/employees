@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 function Items(){
 
     const items = useSelector(state => state.items.items);
-    const activeFields = useSelector(state => state.fields.inputs.filter(field => field.hidden == false));
+    const activeFields = useSelector(state => state.fields.inputs.filter(field => field.hidden === false));
 
     if(!items.length){
         return <p>Сотрудников нет</p>

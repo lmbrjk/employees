@@ -13,14 +13,14 @@ function Info({ match }){
         <div>
             <h1>Информация о сотруднике</h1>
             {
-                fields.map(field => (
-                    field.hidden === false ?
+                fields.map(field =>
+                    <div key={user[field.nameField]} style={{margin:"10px"}}>               
                         <label>
                             {field.labelField}
                             <span>{user[field.nameField]}</span>
                         </label>
-                        : false
-                ))
+                    </div>                        
+                )
             }
             
             <Button component={ Link } to="/list/" variant="contained" color="primary">
