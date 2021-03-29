@@ -23,6 +23,8 @@ function ChangeItem({ match }){
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const inputs = useSelector(state => state.fields.inputs);
 
+    // это будет передано в initialValues формы чтобы 
+    // поля были заполнены текущими значениями (до изменения)
     const [item] = useState(user);
     
     if(user === undefined){
@@ -35,7 +37,7 @@ function ChangeItem({ match }){
             <h1>Изменить информацию о сотруднике</h1>
             <Form
                 validate={validate}
-                //чтобы поля были заполнены текущими значениями (до изменения)
+                // чтобы поля были заполнены текущими значениями (до изменения)
                 initialValues={item}
 
                 onSubmit={(formData) => {
