@@ -13,12 +13,6 @@ export function changeItem({id, item}){
         id, item
     };
 }
-// export function changeItem({id, item}){
-//     return {
-//         type: CHANGE_ITEM,
-//         id, item
-//     };
-// }
 
 export function changeFieldsList(hiddenFields){
     return {
