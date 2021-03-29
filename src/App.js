@@ -15,7 +15,7 @@ function App() {
           <Link to="/new">Создать</Link>
           <Link to="/settings">Настройки</Link>
         </header>
-        <Container maxWidth="sm">        
+        <Container maxWidth="lg">        
           <Switch>
             <Route path="/list" component={ List } /> 
             <Route path="/new" component={ NewItem } />
