@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector } from 'react-redux'
 
@@ -8,6 +8,10 @@ import Button from '@material-ui/core/Button';
 function Info({ match }){     
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const fields = useSelector(state => state.fields.inputs);
+    
+    if(user === undefined){
+        return <Redirect to="/" />
+    }    
  
     return (
         <div>

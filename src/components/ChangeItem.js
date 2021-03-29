@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -23,12 +23,16 @@ function ChangeItem({ match }){
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const inputs = useSelector(state => state.fields.inputs);
 
-    const [item] = useState(user);    
+    const [item] = useState(user);
+    
+    if(user === undefined){
+        return <Redirect to="/" />
+    }
 
     return (
 
         <div>
-            <h1>Изменить информацию о сотруднике</h1>            
+            <h1>Изменить информацию о сотруднике</h1>
             <Form
                 validate={validate}
                 //чтобы поля были заполнены текущими значениями (до изменения)
