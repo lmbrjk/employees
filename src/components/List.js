@@ -8,7 +8,6 @@ import Info from "./Info"
 import ChangeItem from "./ChangeItem"
 
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
 import { GridList } from "@material-ui/core"
 
 function Items(){
@@ -20,23 +19,35 @@ function Items(){
 
     if(!items.length){
         return <p>Сотрудников нет</p>
-    }
+    }   
 
 
     return (
-        <Grid container>            
-            <Grid item>
-                <Grid container
+        <Grid container
+            direction="row"
+            justify="center"
+            alignItems="center"
+        >            
+            <Grid item
+                xs={7}
+            >
+                <Grid container item
                     direction="row"
                     justify="flex-start"
                     alignItems="center"
 
                     spacing={2}
                 >
-                    <Grid item>№</Grid>
+                    <Grid item
+                        xs={12 / (activeFields.length + 1)}
+                    >№</Grid>
                     {
                         activeFields.map( field =>
-                            <Grid item>{field.labelField}</Grid>
+                            <Grid item
+                                xs={12 / (activeFields.length + 1)}
+                            >
+                                {field.labelField}
+                            </Grid>
                         )
                     }
                 </Grid>
@@ -44,7 +55,9 @@ function Items(){
                     {items.map( (item, index) => <ListItem activeFields={activeFields} item={item} key={index} index={index} />)}
                 </GridList>
             </Grid>
-            <Grid item>
+            <Grid item
+                xs={5}
+            >
                 <Switch>
                     <Route path="/list/info/:id" component={ Info } />
                     <Route path="/list/edit/:id" component={ ChangeItem } />

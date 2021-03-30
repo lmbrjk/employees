@@ -16,14 +16,21 @@ function ItemList({ activeFields, item, index }){
                     justify="flex-start"
                     alignItems="center"
 
-                    spacing={2}
+                    
                 >
-                    <Grid item>
+                    <Grid item
+                        xs={12 / (activeFields.length + 1)}
+                    >
                         {index + 1}
                     </Grid>                    
                     {
                         activeFields.map(field => ( 
-                            <Grid item key={item[field.nameField]}>{item[field.nameField]}</Grid>
+                            <Grid item 
+                                xs={12 / (activeFields.length + 1)}
+                                key={item[field.nameField]}
+                            >
+                                {item[field.nameField]}
+                            </Grid>
                         ))
                     }                        
                 </Grid>
