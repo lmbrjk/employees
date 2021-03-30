@@ -1,41 +1,33 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import ListItem from '@material-ui/core/ListItem';
-import Grid from '@material-ui/core/Grid';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
-function ItemList({ activeFields, item, index }){    
+function ItemList({ activeFields, item, index, sidebarSwitch, sidebarShow }){    
     // activeFields - активные поля
     // item - данные о выбранном сотруднике
     // index - порядковый номер под которым будет отображаться сотрудник
+    // sidebarSwitch - функция изменяющая sidebarShow в компоненте List
+    // sidebarShow - отвечает за показ/скрытие бокового меню
     return (       
-        <ListItem button component={Link} to={`/list/info/${item.id}`}>
+        <TableRow button onClick={ () => sidebarSwitch(sidebarShow = true) } component={Link} to={`/list/info/${item.id}`}>
             
-                <Grid container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
-
-                    
-                >
-                    <Grid item
+            <TableCell>
+                {index + 1}
+            </TableCell>                    
+            {
+                activeFields.map(field => ( 
+                    <TableCell item 
                         xs={12 / (activeFields.length + 1)}
+                        key={item[field.nameField]}
                     >
-                        {index + 1}
-                    </Grid>                    
-                    {
-                        activeFields.map(field => ( 
-                            <Grid item 
-                                xs={12 / (activeFields.length + 1)}
-                                key={item[field.nameField]}
-                            >
-                                {item[field.nameField]}
-                            </Grid>
-                        ))
-                    }                        
-                </Grid>
+                        {item[field.nameField]}
+                    </TableCell>
+                ))
+            }
             
-        </ListItem>
+        </TableRow>
     )
 }
 

@@ -1,5 +1,5 @@
-import React from "react"
-import { Switch, Route, Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Switch, Route, Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import { useSelector } from 'react-redux'
 
@@ -8,7 +8,12 @@ import Info from "./Info"
 import ChangeItem from "./ChangeItem"
 
 import Grid from '@material-ui/core/Grid';
-import { GridList } from "@material-ui/core"
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 function Items(){
 
@@ -17,52 +22,66 @@ function Items(){
     // на основе этого будет производиться фильтрация скрытых полей
     const activeFields = useSelector(state => state.fields.inputs.filter(field => field.hidden === false));
 
+    // если sidebarShow = true - список отображается на всю страницу
+    // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
+    const [sidebarShow, sidebarSwitch] = useState(false)
+    
     if(!items.length){
         return <p>Сотрудников нет</p>
-    }   
-
+    }
 
     return (
         <Grid container
             direction="row"
-            justify="center"
-            alignItems="center"
-        >            
-            <Grid item
-                xs={7}
-            >
-                <Grid container item
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="center"
+            justify="space-around"
 
-                    spacing={2}
-                >
-                    <Grid item
-                        xs={12 / (activeFields.length + 1)}
-                    >№</Grid>
-                    {
-                        activeFields.map( field =>
-                            <Grid item
-                                xs={12 / (activeFields.length + 1)}
-                            >
-                                {field.labelField}
-                            </Grid>
-                        )
-                    }
-                </Grid>
-                <GridList>
-                    {items.map( (item, index) => <ListItem activeFields={activeFields} item={item} key={index} index={index} />)}
-                </GridList>
-            </Grid>
+            spacing={5}
+        >
             <Grid item
-                xs={5}
-            >
-                <Switch>
-                    <Route path="/list/info/:id" component={ Info } />
-                    <Route path="/list/edit/:id" component={ ChangeItem } />
-                </Switch>
+                // 7 - размер с боковым меню
+                // 12 - без бокового меню
+                lg={ sidebarShow ? 7 : 12 }
+            >          
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>№</TableCell>
+                                {
+                                    activeFields.map( field =>
+                                        <TableCell key={field.nameField}>
+                                            {field.labelField}
+                                        </TableCell>
+                                    )
+                                }
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                items.map( (item, index) => 
+                                    <ListItem 
+                                        sidebarSwitch={sidebarSwitch} 
+                                        activeFields={activeFields} 
+                                        item={item} key={index} index={index} 
+                                    />)
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Grid>
+            { 
+                // при перезагрузке на странице контакта sidebarShow = true если до перезагрузки было открыто боковое меню
+                sidebarShow ?
+                (<Grid item
+                    lg={5}
+                >
+                    <Switch>
+                        <Route path="/list/info/:id" render={(props)=><Info sidebarSwitch={sidebarSwitch} {...props}/>} />
+                        <Route path="/list/edit/:id" render={(props)=><ChangeItem sidebarSwitch={sidebarSwitch} {...props}/>}/>
+                    </Switch>
+                </Grid>)
+                : <Redirect to="/list" />
+            }
         </Grid>
     );
 }
