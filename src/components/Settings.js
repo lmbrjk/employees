@@ -7,9 +7,6 @@ import { Field, Form } from "react-final-form"
 import Button from '@material-ui/core/Button';
 
 
-
-
-
 function Settings(){ 
     
     const dispatch = useDispatch();

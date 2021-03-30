@@ -41,7 +41,7 @@ function ChangeItem({ match, sidebarSwitch, sidebarShow }){
         <Grid container
             direction="column"
             justify="flex-start"
-            alignItems="start"
+            alignItems="flex-start"
 
             spacing={3}
         >
@@ -76,7 +76,7 @@ function ChangeItem({ match, sidebarSwitch, sidebarShow }){
                         <Grid container
                             direction="column"
                             justify="flex-start"
-                            alignItems="start"
+                            alignItems="flex-start"
                 
                             spacing={3}
                         >
