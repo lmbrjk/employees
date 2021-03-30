@@ -4,17 +4,17 @@ import NewItem from "./components/NewItem"
 import Settings from "./components/Settings"
 
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 function App() {
   return (
     
       <div className="App">
-        <header>
-          <nav>Навигация</nav>
+        <Grid container>
           <Link to="/list">Список сотрудников</Link>
           <Link to="/new">Создать</Link>
           <Link to="/settings">Настройки</Link>
-        </header>
+        </Grid>
         <Container maxWidth="lg">        
           <Switch>
             <Route path="/list" component={ List } /> 

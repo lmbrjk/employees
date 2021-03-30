@@ -1,10 +1,9 @@
-import React, { useState } from "react"
-import { Link, Redirect } from "react-router-dom"
-import { connect } from "react-redux"
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-
-import { Field, Form } from "react-final-form"
+import { Field, Form } from "react-final-form";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -19,9 +18,8 @@ const validate = values => {
     return errors;
 };
 
-function ChangeItem({ match, sidebarSwitch, sidebarShow }){ 
+function ChangeItem({ match, sidebarSwitch }){ 
     // sidebarSwitch - функция изменяющая sidebarShow в компоненте List
-    // sidebarShow - отвечает за показ/скрытие бокового меню
     
     const dispatch = useDispatch();
 
@@ -86,7 +84,7 @@ function ChangeItem({ match, sidebarSwitch, sidebarShow }){
                                     <Grid item
                                         key={input.nameField}
                                     >
-                                        <InputLabel for={input.nameField}>
+                                        <InputLabel for={input.nameField} gutterBottom>
                                             {input.labelField}
                                         </InputLabel>
                                         {
@@ -119,14 +117,14 @@ function ChangeItem({ match, sidebarSwitch, sidebarShow }){
                                 item lg={12}
 
                                 direction="row"
-                                justify="space-around"
+                                justify="flex-start"
                                 alignItems="center"
                             >   
                                 <Button type="submit" variant="contained" color="primary">
                                     Сохранить
                                 </Button>
-                                <Button  component={ Link } to="/list/"
-                                    onClick={ () => sidebarSwitch(sidebarShow = false)}
+                                <Button  component={ Link } to="/list"
+                                    onClick={ () => sidebarSwitch(false)}
                                     variant="contained" color="primary"
                                 >
                                     Выйти

@@ -1,9 +1,9 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { connect } from "react-redux"
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { Field, Form } from "react-final-form"
+import { Field, Form } from "react-final-form";
 import Button from '@material-ui/core/Button';
 
 const validate = values => {

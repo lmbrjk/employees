@@ -14,6 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from "@material-ui/core/Typography";
 
 function Items(){
 
@@ -27,7 +28,9 @@ function Items(){
     const [sidebarShow, sidebarSwitch] = useState(false);
     
     if(!items.length){
-        return <p>Сотрудников нет</p>
+        return  <Typography component="h1" variant="h5" color="inherit" gutterBottom>
+                    Сотрудников нет
+                </Typography>;
     }
 
     return (
@@ -72,7 +75,7 @@ function Items(){
                 </TableContainer>
             </Grid>
             { 
-                // при перезагрузке на странице контакта sidebarShow = true если до перезагрузки было открыто боковое меню
+                // при перезагрузке sidebarShow = true если до перезагрузки было открыто боковое меню
                 sidebarShow ?
                 (<Grid item
                     lg={5}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-function ItemList({ activeFields, item, index, sidebarSwitch, sidebarShow }){    
+function ItemList({ activeFields, item, index, sidebarSwitch }){    
     // activeFields - активные поля
     // item - данные о выбранном сотруднике
     // index - порядковый номер под которым будет отображаться сотрудник
@@ -12,8 +12,8 @@ function ItemList({ activeFields, item, index, sidebarSwitch, sidebarShow }){
     // sidebarShow - отвечает за показ/скрытие бокового меню
     return (       
         <TableRow button 
-            onClick={ () => sidebarSwitch(sidebarShow = true) } 
-            component={Link} to={`/list/info/${item.id}`}
+            onClick={ () => sidebarSwitch(true) } 
+            component={ Link } to={`/list/info/${item.id}`}
         >
             
             <TableCell>
@@ -21,8 +21,7 @@ function ItemList({ activeFields, item, index, sidebarSwitch, sidebarShow }){
             </TableCell>                    
             {
                 activeFields.map(field => ( 
-                    <TableCell item 
-                        xs={12 / (activeFields.length + 1)}
+                    <TableCell item
                         key={field.nameField}
                     >
                         {item[field.nameField]}

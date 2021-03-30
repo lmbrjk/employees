@@ -1,15 +1,14 @@
-import React from "react"
-import { Link, Redirect } from "react-router-dom"
-import { connect } from "react-redux"
-import { useSelector } from 'react-redux'
+import React from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { useSelector } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Typography } from "@material-ui/core";
 
-function Info( {match, sidebarSwitch, sidebarShow} ){
-    // sidebarSwitch - функция изменяющая sidebarShow в компоненте List
-    // sidebarShow - отвечает за показ/скрытие бокового меню    
+function Info( {match, sidebarSwitch} ){
+    // sidebarSwitch - функция изменяющая sidebarShow в компоненте List  
 
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const fields = useSelector(state => state.fields.inputs);
@@ -57,11 +56,12 @@ function Info( {match, sidebarSwitch, sidebarShow} ){
                 item lg={12}
 
                 direction="row"
-                justify="space-around"
+                justify="flex-start"
                 alignItems="center"
+                spacing={3}
             >           
                 <Button component={ Link } to="/list" 
-                    onClick={ () => sidebarSwitch(sidebarShow = false)} variant="contained" color="primary"
+                    onClick={ () => sidebarSwitch(false)} variant="contained" color="primary"
                 >
                     Закрыть
                 </Button>
