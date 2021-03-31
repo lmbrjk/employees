@@ -24,7 +24,11 @@ function Settings(){
     /* !/ чтобы при загрузке страницы напротив скрытых полей стояла галка */
 
     return (
-        <div>
+        <Grid container
+            direction="column"
+            justify="flex-start"
+            alignItems="flex-start"
+        >
             <Typography
                 component="h1"
                 variant="h5"
@@ -79,25 +83,29 @@ function Settings(){
                                     </Grid>                                    
                                 ))             
                             }
-                            <Grid container item
-                                item lg={12}
-
+                            <Grid container
+                                item
                                 direction="row"
                                 justify="flex-start"
                                 alignItems="center"
+                                spacing={1}
                             >
-                                <Button name="back" type="submit" variant="contained" color="primary">
-                                    Сохранить
-                                </Button>
-                                <Button component={ Link } to="/" variant="contained" color="primary">
-                                    Закрыть
-                                </Button>
+                                <Grid item>
+                                    <Button name="back" type="submit" variant="contained" color="primary">
+                                        Сохранить
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button component={ Link } to="/" variant="contained" color="primary">
+                                        Закрыть
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </form>
                 )}
             />
-        </div>
+        </Grid>
     )
 }
 

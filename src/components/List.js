@@ -16,7 +16,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from "@material-ui/core/Typography";
 
-function Items(){
+
+function Items({match}){
 
     const items = useSelector(state => state.items.items);
 
@@ -25,7 +26,7 @@ function Items(){
 
     // если sidebarShow = true - список отображается на всю страницу
     // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
-    const [sidebarShow, sidebarSwitch] = useState(false);
+    let [sidebarShow, sidebarSwitch] = useState(false);
     
     if(!items.length){
         return  <Typography component="h1" variant="h5" color="inherit" gutterBottom>

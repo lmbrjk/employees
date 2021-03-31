@@ -3,12 +3,25 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { useSelector } from 'react-redux';
 
+
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Typography } from "@material-ui/core";
 
+const useStyles = makeStyles({
+    root: { 
+        borderLeft: "2px solid black"
+    }
+        
+    // a style rule
+    //label: {}, // a nested style rule
+  });
+
 function Info( {match, sidebarSwitch} ){
     // sidebarSwitch - функция изменяющая sidebarShow в компоненте List  
+
+    const classes = useStyles();
 
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const fields = useSelector(state => state.fields.inputs);
@@ -24,8 +37,10 @@ function Info( {match, sidebarSwitch} ){
             alignItems="flex-start"
 
             spacing={3}
+
+            className={classes.root}
         >
-            <Grid item lg={12}>
+            <Grid item>
                 <Typography 
                     component="h1"
                     variant="h5"
@@ -52,22 +67,26 @@ function Info( {match, sidebarSwitch} ){
                     </Grid>               
                 )
             }
-            <Grid container item
-                item lg={12}
+            <Grid container
+                item
 
                 direction="row"
                 justify="flex-start"
                 alignItems="center"
-                spacing={3}
-            >           
-                <Button component={ Link } to="/list" 
-                    onClick={ () => sidebarSwitch(false)} variant="contained" color="primary"
-                >
-                    Закрыть
-                </Button>
-                <Button component={ Link } to={"/list/edit/" + match.params.id} variant="contained" color="primary">
-                    Изменить
-                </Button>
+                spacing={1}
+            >     
+                <Grid item>  
+                    <Button component={ Link } to="/list" 
+                        onClick={ () => sidebarSwitch(false)} variant="contained" color="primary"
+                    >
+                        Закрыть
+                    </Button>
+                </Grid>    
+                <Grid item>
+                    <Button component={ Link } to={"/list/edit/" + match.params.id} variant="contained" color="primary">
+                        Изменить
+                    </Button>
+                </Grid>    
             </Grid>
         </Grid>
     )

@@ -40,17 +40,17 @@ function ChangeItem({ match, sidebarSwitch }){
             direction="column"
             justify="flex-start"
             alignItems="flex-start"
-
-            spacing={3}
         >
-            <Typography
-                component="h1"
-                variant="h5"
-                color="inherit"
-                gutterBottom
-            >
-                Изменить информацию о сотруднике
-            </Typography>
+            <Grid item>
+                <Typography
+                    component="h1"
+                    variant="h5"
+                    color="inherit"
+                    gutterBottom
+                >
+                    Изменить информацию о сотруднике
+                </Typography>
+            </Grid>
             <Form
                 validate={validate}
                 // чтобы поля были заполнены текущими значениями (до изменения)
@@ -113,22 +113,28 @@ function ChangeItem({ match, sidebarSwitch }){
                                     </Grid>
                                 ))             
                             }
-                            <Grid container item
-                                item lg={12}
+                            <Grid container
+                                item
 
                                 direction="row"
                                 justify="flex-start"
                                 alignItems="center"
-                            >   
-                                <Button type="submit" variant="contained" color="primary">
-                                    Сохранить
-                                </Button>
-                                <Button  component={ Link } to="/list"
-                                    onClick={ () => sidebarSwitch(false)}
-                                    variant="contained" color="primary"
-                                >
-                                    Выйти
-                                </Button>
+
+                                spacing={1}
+                            >  
+                                <Grid item>
+                                    <Button type="submit" variant="contained" color="primary">
+                                        Сохранить
+                                    </Button>
+                                </Grid> 
+                                <Grid item>
+                                    <Button  component={ Link } to="/list"
+                                        onClick={ () => sidebarSwitch(false)}
+                                        variant="contained" color="primary"
+                                    >
+                                        Выйти
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </form>
