@@ -45,7 +45,6 @@ function ChangeItem({ match, sidebarSwitch }){
     }
 
     return (
-
         <Grid container
             direction="column"
             justify="flex-start"
@@ -99,7 +98,7 @@ function ChangeItem({ match, sidebarSwitch }){
                                         <Grid item
                                             key={input.nameField}
                                         >
-                                            <InputLabel for={input.nameField} gutterBottom>
+                                            <InputLabel htmlFor={input.nameField} >
                                                 {input.labelField}
                                             </InputLabel>
                                             {

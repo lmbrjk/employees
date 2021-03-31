@@ -29,7 +29,7 @@ function Items(){
     let [sidebarShow, sidebarSwitch] = useState(false);
     
     if(!items.length){
-        return  <Typography component="h1" variant="h5" color="inherit" gutterBottom>
+        return  <Typography component="h1" variant="h5" color="inherit" gutterBottom >
                     Сотрудников нет
                 </Typography>;
     }
@@ -43,7 +43,7 @@ function Items(){
             spacing={5}
         >
             <Grid item
-                // 7 - размер с боковым меню
+                // 8 - размер с боковым меню
                 // 12 - без бокового меню
                 lg={ sidebarShow ? 8 : 12 }
             >          

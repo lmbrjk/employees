@@ -7,7 +7,8 @@ import { Field, Form } from "react-final-form";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { Typography, InputLabel } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import InputLabel from "@material-ui/core/InputLabel";
 
 
 const validate = values => {
@@ -75,26 +76,24 @@ function NewItem(props) {
                                     <Grid item
                                         key={input.nameField}
                                     >
-                                        <InputLabel for={input.nameField} gutterBottom>
-                                                {input.labelField}
+                                        <InputLabel htmlFor={input.nameField}>
+                                            {input.labelField}
                                         </InputLabel>        
                                         {
                                             input.typeField === "select" 
                                                 ? <Field
                                                     type={input.typeField}
                                                     name={input.nameField}
-
-                                                    id={input.nameField}
-                                                    component="select"                                    
+                                                    component="select"
+                                                    id={input.nameField}                                                                                        
                                                 >
                                                     {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
                                                 </Field>
                                                 : <Field
                                                     type={input.typeField}
                                                     name={input.nameField}
-
-                                                    id={input.nameField}
                                                     component="input"
+                                                    id={input.nameField}                                                    
                                                 />
                                         }
                                     </Grid>                                    

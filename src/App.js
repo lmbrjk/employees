@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Menu from "./components/Menu";
 import List from "./components/List";
 import NewItem from "./components/NewItem";
@@ -22,9 +22,10 @@ function App() {
         </Grid>
         <Grid lg={12} item>
           <Switch>
-            <Route path="/list" render={(props)=><List {...props}/>}  /> 
-            <Route path="/new" component={ NewItem } />
-            <Route path="/settings" component={ Settings } />
+            <Route path="/list" component={ List } /> 
+            <Route exact path="/new" component={ NewItem } />
+            <Route exact path="/settings" component={ Settings } />
+            <Redirect to="/" />
           </Switch>
         </Grid>
       </Grid>

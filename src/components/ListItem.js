@@ -11,17 +11,16 @@ function ItemList({ activeFields, item, index, sidebarSwitch }){
     // sidebarSwitch - функция изменяющая sidebarShow в компоненте List
     // sidebarShow - отвечает за показ/скрытие бокового меню
     return (       
-        <TableRow button 
+        <TableRow 
             onClick={ () => sidebarSwitch(true) } 
             component={ Link } to={`/list/info/${item.id}`}
-        >
-            
+        >            
             <TableCell>
                 {index + 1}
             </TableCell>                    
             {
                 activeFields.map(field => ( 
-                    <TableCell item
+                    <TableCell
                         key={field.nameField}
                     >
                         {item[field.nameField]}

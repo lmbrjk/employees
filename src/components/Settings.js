@@ -7,7 +7,8 @@ import { Field, Form } from "react-final-form";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { Typography, InputLabel } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import InputLabel from "@material-ui/core/InputLabel";
 
 
 function Settings(){ 
@@ -72,7 +73,8 @@ function Settings(){
                                     <Grid item
                                         key={index}
                                     >
-                                        <InputLabel gutterBottom>{field.labelField}                                            
+                                        <InputLabel>
+                                            {field.labelField}                                            
                                             <Field
                                                 type="checkbox"
                                                 name="fields"
