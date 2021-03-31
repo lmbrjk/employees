@@ -7,20 +7,18 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
-    root: { 
-        borderLeft: "2px solid black"
+    borderLeft: { 
+        borderLeft: "1px solid black"
     }
-        
-    // a style rule
-    //label: {}, // a nested style rule
-  });
+});
 
 function Info( {match, sidebarSwitch} ){
     // sidebarSwitch - функция изменяющая sidebarShow в компоненте List  
 
+    // для добавления стилей компонентам material ui
     const classes = useStyles();
 
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
@@ -37,8 +35,7 @@ function Info( {match, sidebarSwitch} ){
             alignItems="flex-start"
 
             spacing={3}
-
-            className={classes.root}
+            className={classes.borderLeft}
         >
             <Grid item>
                 <Typography 
@@ -52,7 +49,9 @@ function Info( {match, sidebarSwitch} ){
             </Grid>            
             {
                 fields.map(field =>
-                    <Grid item lg={12} key={user[field.nameField]}>
+                    <Grid item
+                        key={user[field.nameField]}
+                    >
                         <Typography
                             component="h5"
                             variant="subtitle2"

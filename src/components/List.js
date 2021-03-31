@@ -1,11 +1,11 @@
-import React, { useState } from "react"
-import { Switch, Route, Redirect } from "react-router-dom"
-import { connect } from "react-redux"
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { useSelector } from 'react-redux';
 
-import ListItem from "./ListItem"
-import Info from "./Info"
-import ChangeItem from "./ChangeItem"
+import ListItem from "./ListItem";
+import Info from "./Info";
+import ChangeItem from "./ChangeItem";
 
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
@@ -17,7 +17,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from "@material-ui/core/Typography";
 
 
-function Items({match}){
+function Items(){
 
     const items = useSelector(state => state.items.items);
 
@@ -45,7 +45,7 @@ function Items({match}){
             <Grid item
                 // 7 - размер с боковым меню
                 // 12 - без бокового меню
-                lg={ sidebarShow ? 7 : 12 }
+                lg={ sidebarShow ? 8 : 12 }
             >          
                 <TableContainer>
                     <Table>
@@ -79,7 +79,7 @@ function Items({match}){
                 // при перезагрузке sidebarShow = true если до перезагрузки было открыто боковое меню
                 sidebarShow ?
                 (<Grid item
-                    lg={5}
+                    lg={4}
                 >
                     <Switch>
                         <Route path="/list/info/:id" render={(props)=><Info sidebarSwitch={sidebarSwitch} {...props}/>} />

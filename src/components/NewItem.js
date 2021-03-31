@@ -29,7 +29,7 @@ function NewItem(props) {
             direction="column"
             justify="flex-start"
             alignItems="flex-start"
-        >
+        >            
             <Typography
                 component="h1"
                 variant="h5"
@@ -37,7 +37,7 @@ function NewItem(props) {
                 gutterBottom
             >
                 Добавить сотрудника
-            </Typography>
+            </Typography>            
             <Form 
                 validate={validate}
                 onSubmit={(formData) => {
@@ -70,59 +70,60 @@ function NewItem(props) {
                             
                             spacing={3}
                         >
-                        { 
-                            inputs.map(input => (
-                                <Grid item
-                                    key={input.nameField}
-                                >
-                                    <InputLabel for={input.nameField} gutterBottom>
-                                            {input.labelField}
-                                    </InputLabel>        
-                                    {
-                                        input.typeField === "select" 
-                                            ? <Field
-                                                type={input.typeField}
-                                                name={input.nameField}
+                            { 
+                                inputs.map(input => (
+                                    <Grid item
+                                        key={input.nameField}
+                                    >
+                                        <InputLabel for={input.nameField} gutterBottom>
+                                                {input.labelField}
+                                        </InputLabel>        
+                                        {
+                                            input.typeField === "select" 
+                                                ? <Field
+                                                    type={input.typeField}
+                                                    name={input.nameField}
 
-                                                id={input.nameField}
-                                                component="select"                                    
-                                            >
-                                                {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
-                                            </Field>
-                                            : <Field
-                                                type={input.typeField}
-                                                name={input.nameField}
+                                                    id={input.nameField}
+                                                    component="select"                                    
+                                                >
+                                                    {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
+                                                </Field>
+                                                : <Field
+                                                    type={input.typeField}
+                                                    name={input.nameField}
 
-                                                id={input.nameField}
-                                                component="input"
-                                            />
-                                    }
-                                </Grid>                                    
-                            ))             
-                        }
-                        </Grid>
-                        <Grid container
-                            item 
+                                                    id={input.nameField}
+                                                    component="input"
+                                                />
+                                        }
+                                    </Grid>                                    
+                                ))             
+                            }
+                        
+                            <Grid container
+                                item 
 
-                            direction="row"
-                            justify="space-around"
-                            alignItems="center"
-                            spacing={1}
-                        > 
-                            <Grid item>
-                                <Button name="back" type="submit" variant="contained" color="primary">
-                                    Сохранить и вернуться в список
-                                </Button>
-                            </Grid>
-                            <Grid item>
-                                <Button name="more" type="submit" variant="contained" color="primary">
-                                    Сохранить и добавить еще
-                                </Button>
-                            </Grid>
-                            <Grid item>
-                                <Button component={ Link } to="/" variant="contained" color="primary">
-                                    Закрыть
-                                </Button>
+                                direction="row"
+                                justify="space-around"
+                                alignItems="center"
+                                spacing={1}
+                            > 
+                                <Grid item>
+                                    <Button name="back" type="submit" variant="contained" color="primary">
+                                        Сохранить и вернуться в список
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button name="more" type="submit" variant="contained" color="primary">
+                                        Сохранить и добавить еще
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button component={ Link } to="/" variant="contained" color="primary">
+                                        Закрыть
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </form>
