@@ -17,7 +17,6 @@ function App() {
     <Container className="App" maxWidth="lg">
       <Grid container
         direction="column"
-        //justify="flex-start"
         alignItems="stretch"
 
         spacing={3}
