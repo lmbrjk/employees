@@ -1,13 +1,14 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { connect } from "react-redux"
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { Field, Form } from "react-final-form"
+import { Field, Form } from "react-final-form";
+
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
-
-
+import Typography from "@material-ui/core/Typography";
+import InputLabel from "@material-ui/core/InputLabel";
 
 
 function Settings(){ 
@@ -24,9 +25,26 @@ function Settings(){
     /* !/ чтобы при загрузке страницы напротив скрытых полей стояла галка */
 
     return (
-        <div>
-            <h1>Настройки</h1>
-            <p>Выберите поля которые не будут отображаться в списке сотрудников</p>
+        <Grid container
+            direction="column"
+            justify="flex-start"
+            alignItems="flex-start"
+        >
+            <Typography
+                component="h1"
+                variant="h5"
+                color="inherit"
+                gutterBottom
+            >
+                Настройки
+            </Typography>
+            <Typography
+                variant="subtitle2"
+                color="inherit"
+                gutterBottom
+            >
+                Выбранные поля не будут отображаться в списке сотрудников
+            </Typography>
             <Form
                 // определяем напротив каких свойств будет стоять галка при загрузке
                 // свойство fields указано во всех чекбоксах name="fields"
@@ -42,31 +60,54 @@ function Settings(){
                 }}
                 render = {({ handleSubmit }) => (
                     <form onSubmit={ handleSubmit }>
-                        { 
-                            allFields.map((field, index) => (
+                        <Grid container
+                            direction="column"
+                            justify="flex-start"
+                            alignItems="flex-start"
+                
+                            spacing={3}
+                        >
+                            { 
+                                allFields.map((field, index) => (
 
-                                <div key={index} style={{margin:"10px"}}>
-                                    <label>{field.labelField}                                            
-                                        <Field
-                                            type="checkbox"
-                                            name="fields"
-                                            component="input"
-                                            value={field.nameField}
-                                        />
-                                    </label>
-                                </div>                                    
-                            ))             
-                        }
-                        <Button name="back" type="submit" variant="contained" color="primary">
-                            Сохранить
-                        </Button>
-                        <Button component={ Link } to="/" variant="contained" color="primary">
-                            Закрыть
-                        </Button>
+                                    <Grid item
+                                        key={index}
+                                    >
+                                        <InputLabel>
+                                            {field.labelField}                                            
+                                            <Field
+                                                type="checkbox"
+                                                name="fields"
+                                                component="input"
+                                                value={field.nameField}
+                                            />
+                                        </InputLabel>
+                                    </Grid>                                    
+                                ))             
+                            }
+                            <Grid container
+                                item
+                                direction="row"
+                                justify="flex-start"
+                                alignItems="center"
+                                spacing={1}
+                            >
+                                <Grid item>
+                                    <Button name="back" type="submit" variant="contained" color="primary">
+                                        Сохранить
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button component={ Link } to="/" variant="contained" color="primary">
+                                        Закрыть
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </form>
                 )}
             />
-        </div>
+        </Grid>
     )
 }
 
