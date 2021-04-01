@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ListItem from "./ListItem";
 import Info from "./Info";
@@ -19,14 +19,17 @@ import Typography from "@material-ui/core/Typography";
 
 function Items(){
 
+    const dispatch = useDispatch();
+
     const items = useSelector(state => state.items.items);
 
     // на основе этого будет производиться фильтрация скрытых полей
     const activeFields = useSelector(state => state.fields.inputs.filter(field => field.hidden === false));
 
-    // если sidebarShow = true - список отображается на всю страницу
-    // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
-    let [sidebarShow, sidebarSwitch] = useState(false);
+    // // если sidebarShow = true - список отображается на всю страницу
+    // // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
+    // let [sidebarShow, sidebarSwitch] = useState(false);
+    const switchSidebar = useSelector(state => state.fields.sidebarShow);
     
     if(!items.length){
         return  <Typography component="h1" variant="h5" color="inherit" gutterBottom >
@@ -42,10 +45,11 @@ function Items(){
 
             spacing={5}
         >
+            {/* {console.log(switchSidebar)} */}
             <Grid item
                 // 8 - размер с боковым меню
                 // 12 - без бокового меню
-                lg={ sidebarShow ? 8 : 12 }
+                lg={ switchSidebar ? 8 : 12 }
             >          
                 <TableContainer>
                     <Table>
@@ -65,7 +69,7 @@ function Items(){
                             {
                                 items.map( (item, index) => 
                                     <ListItem 
-                                        sidebarSwitch={sidebarSwitch} 
+                                        //sidebarSwitch={sidebarSwitch} 
                                         activeFields={activeFields} 
                                         item={item} key={index} index={index} 
                                     />
@@ -77,16 +81,16 @@ function Items(){
             </Grid>
             { 
                 // при перезагрузке sidebarShow = true если до перезагрузки было открыто боковое меню
-                sidebarShow ?
-                (<Grid item
-                    lg={4}
-                >
-                    <Switch>
-                        <Route path="/list/info/:id" render={(props)=><Info sidebarSwitch={sidebarSwitch} {...props}/>} />
-                        <Route path="/list/edit/:id" render={(props)=><ChangeItem sidebarSwitch={sidebarSwitch} {...props}/>}/>
-                    </Switch>
-                </Grid>)
-                : <Redirect to="/list" />
+                // sidebarShow ?
+                // (<Grid item
+                //     lg={4}
+                // >
+                //     <Switch>
+                //         <Route path="/list/info/:id" component={Info} />
+                //         <Route path="/list/edit/:id" component={ChangeItem} />
+                //     </Switch>
+                // </Grid>)
+                // : <Redirect to="/list" />
             }
         </Grid>
     );

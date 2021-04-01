@@ -1,4 +1,4 @@
-import {CHANGE_FIELDS_LIST} from "./types"
+import {CHANGE_FIELDS_LIST, SWITCH_SIDEBAR} from "./types"
 
 const initialState = {
     inputs: [
@@ -9,7 +9,8 @@ const initialState = {
         { typeField: "number", nameField: "number", labelField: "Табельный номер", hidden: false },
         { typeField: "select", nameField: "post", labelField: "Должность", labels: ["менеджер", "кассир", "экономист", "начальник отдела"], hidden: true },
         { typeField: "select", nameField: "division", labelField: "Подразделение", labels: ["кассовых операций", "кредитный отдел", "по работе с юрлицами"], hidden: true }
-    ]
+    ],
+    sidebarShow: false
 };
 
 export const fieldsReducer = (state = initialState, action) => {
@@ -23,6 +24,10 @@ export const fieldsReducer = (state = initialState, action) => {
                 : field.hidden = false
             ) 
             return stateCopy;
+        case SWITCH_SIDEBAR:        
+            return {
+                ...state, sidebarShow: state.sidebarShow
+            };
         default: return state;
     }
 }
