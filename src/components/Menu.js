@@ -18,7 +18,7 @@ const menuItems = [
     { itemLabel: "Настройки", linkTo: "/settings"}
 ];
 
-function Menu(){
+function Menu({sidebarSwitch}){
     // для добавления стилей компонентам material ui
     const classes = useStyles();
 
@@ -33,6 +33,8 @@ function Menu(){
                             label={item.itemLabel} 
                             to={item.linkTo}
                             className={classes.opacity}
+
+                            onClick={ () => sidebarSwitch(false)}
                         />
                     )
                 }

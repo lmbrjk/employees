@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { useSelector } from 'react-redux';
@@ -17,16 +17,16 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from "@material-ui/core/Typography";
 
 
-function Items(){
+function Items({sidebarSwitch, sidebarShow}){
+    // если sidebarShow = true - список отображается на всю страницу
+    // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
 
+    
     const items = useSelector(state => state.items.items);
 
     // на основе этого будет производиться фильтрация скрытых полей
     const activeFields = useSelector(state => state.fields.inputs.filter(field => field.hidden === false));
-
-    // если sidebarShow = true - список отображается на всю страницу
-    // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
-    let [sidebarShow, sidebarSwitch] = useState(false);
+    
     
     if(!items.length){
         return  <Typography component="h1" variant="h5" color="inherit" gutterBottom >

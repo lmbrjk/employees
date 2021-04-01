@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Menu from "./components/Menu";
 import List from "./components/List";
@@ -8,6 +9,11 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 function App() {
+  // если sidebarShow = true - список отображается на всю страницу
+  // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
+  
+  let [sidebarShow, sidebarSwitch] = useState(false);
+
   return (    
     <Container className="App" maxWidth="lg">
       <Grid container
@@ -18,11 +24,11 @@ function App() {
         spacing={3}
       >
         <Grid item>
-          <Menu />
+          <Menu sidebarSwitch={sidebarSwitch} />
         </Grid>
         <Grid lg={12} item>
           <Switch>
-            <Route path="/list" component={ List } /> 
+            <Route path="/list" render={(props)=><List sidebarSwitch={sidebarSwitch} sidebarShow={sidebarShow} {...props}/>} /> 
             <Route exact path="/new" component={ NewItem } />
             <Route exact path="/settings" component={ Settings } />
             <Redirect to="/" />
