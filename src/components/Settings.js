@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Field, Form } from "react-final-form";
@@ -111,4 +110,4 @@ function Settings(){
     )
 }
 
-export default connect()(Settings);
+export default Settings;

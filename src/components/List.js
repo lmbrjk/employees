@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { useSelector } from 'react-redux';
 
 import ListItem from "./ListItem";
@@ -92,4 +91,4 @@ function Items({sidebarSwitch, sidebarShow}){
     );
 }
 
-export default connect()(Items)
+export default Items;

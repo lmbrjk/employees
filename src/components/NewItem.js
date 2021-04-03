@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Field, Form } from "react-final-form";
@@ -132,4 +131,4 @@ function NewItem(props) {
     )
 }
 
-export default connect()(NewItem)
+export default NewItem;

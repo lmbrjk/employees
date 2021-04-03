@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Field, Form } from "react-final-form";
@@ -159,4 +158,4 @@ function ChangeItem({ match, sidebarSwitch }){
     )
 }
 
-export default connect()(ChangeItem);
+export default ChangeItem;

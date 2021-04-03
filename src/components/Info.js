@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { useSelector } from 'react-redux';
-
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -91,4 +89,4 @@ function Info( {match, sidebarSwitch} ){
     )
 }
 
-export default connect()(Info);
+export default Info;
