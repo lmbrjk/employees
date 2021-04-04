@@ -10,13 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import InputLabel from "@material-ui/core/InputLabel";
 
 
-const validate = values => {
-    const errors = {};
-    if (!values.surname) {
-      errors.surname = 'Поле должно быть заполнено';
-    }
-    return errors;
-};
+const required = value => (value ? undefined : 'Поле должно быть заполнено');
 
 
 export default function NewItem(props) {
@@ -40,9 +34,9 @@ export default function NewItem(props) {
                 Добавить сотрудника
             </Typography>            
             <Form 
-                validate={validate}
+                validate={required}
                 onSubmit={(formData) => {
-
+                    console.log(required())
                     const payload = {
                         id: Date.now().toString(),
                         ...formData
@@ -51,7 +45,7 @@ export default function NewItem(props) {
                     dispatch({type: "CREATE_ITEM", payload});
 
                 }}
-                render = {({ handleSubmit, form }) => (
+                render = {({ handleSubmit, values, form, submitting }) => (
                     <form onSubmit={ 
                         //необходимо для очистки полей после записи в redux
                         async (event) => {
@@ -89,12 +83,27 @@ export default function NewItem(props) {
                                                 >
                                                     {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
                                                 </Field>
-                                                : <Field
-                                                    type={input.typeField}
-                                                    name={input.nameField}
-                                                    component="input"
-                                                    id={input.nameField}                                                    
-                                                />
+                                                : input.typeField === "surname"
+                                                    ? <Field
+                                                        type={input.typeField}
+                                                        name={input.nameField}
+                                                        component="input"
+                                                        id={input.nameField}
+                                                        validate={required}                                     
+                                                      >
+                                                          {({ input, meta }) => (
+                                                            <div>
+                                                              <input {...input} />                                                              
+                                                              {meta.error && meta.touched && <span>{meta.error}</span>}
+                                                            </div>
+                                                          )}
+                                                      </Field>
+                                                    : <Field
+                                                        type={input.typeField}
+                                                        name={input.nameField}
+                                                        component="input"
+                                                        id={input.nameField}                                                    
+                                                      />
                                         }
                                     </Grid>                                    
                                 ))             
@@ -109,12 +118,12 @@ export default function NewItem(props) {
                                 spacing={1}
                             > 
                                 <Grid item>
-                                    <Button name="back" type="submit" variant="contained" color="primary">
+                                    <Button name="back" type="submit" disabled={submitting} variant="contained" color="primary">
                                         Сохранить и вернуться в список
                                     </Button>
                                 </Grid>
                                 <Grid item>
-                                    <Button name="more" type="submit" variant="contained" color="primary">
+                                    <Button name="more" type="submit" disabled={submitting} variant="contained" color="primary">
                                         Сохранить и добавить еще
                                     </Button>
                                 </Grid>
