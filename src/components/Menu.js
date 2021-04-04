@@ -18,7 +18,7 @@ const menuItems = [
     { itemLabel: "Настройки", linkTo: "/settings"}
 ];
 
-function Menu({sidebarSwitch}){
+export default function Menu({sidebarSwitch}){
     // для добавления стилей компонентам material ui
     const classes = useStyles();
 
@@ -33,7 +33,6 @@ function Menu({sidebarSwitch}){
                             label={item.itemLabel} 
                             to={item.linkTo}
                             className={classes.opacity}
-
                             onClick={ () => sidebarSwitch(false)}
                         />
                     )
@@ -42,5 +41,3 @@ function Menu({sidebarSwitch}){
       </AppBar>
     )
 }
-
-export default Menu;

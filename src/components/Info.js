@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     }
 });
 
-function Info( {match, sidebarSwitch} ){
+export default function Info( {match, sidebarSwitch} ){
     // sidebarSwitch - функция изменяющая sidebarShow в компоненте List  
 
     // для добавления стилей компонентам material ui
@@ -24,14 +24,15 @@ function Info( {match, sidebarSwitch} ){
     
     if(user === undefined){
         return <Redirect to="/" />
-    }    
+    }  else {
+        sidebarSwitch(true);
+    }   
  
     return (
         <Grid container
             direction="column"
             justify="flex-start"
             alignItems="flex-start"
-
             spacing={3}
             className={classes.borderLeft}
         >
@@ -66,7 +67,6 @@ function Info( {match, sidebarSwitch} ){
             }
             <Grid container
                 item
-
                 direction="row"
                 justify="flex-start"
                 alignItems="center"
@@ -88,5 +88,3 @@ function Info( {match, sidebarSwitch} ){
         </Grid>
     )
 }
-
-export default Info;

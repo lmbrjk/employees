@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-function ItemList({ activeFields, item, index, sidebarSwitch }){    
+export default function ItemList({ activeFields, item, index, sidebarSwitch }){    
     // activeFields - активные поля
     // item - данные о выбранном сотруднике
     // index - порядковый номер под которым будет отображаться сотрудник
@@ -31,5 +31,3 @@ function ItemList({ activeFields, item, index, sidebarSwitch }){
         </TableRow>
     )
 }
-
-export default ItemList;

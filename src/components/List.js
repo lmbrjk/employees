@@ -16,7 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from "@material-ui/core/Typography";
 
 
-function Items({sidebarSwitch, sidebarShow}){
+export default function Items({sidebarSwitch, sidebarShow}){
     // если sidebarShow = true - список отображается на всю страницу
     // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
 
@@ -38,7 +38,6 @@ function Items({sidebarSwitch, sidebarShow}){
             direction="row"
             justify="space-around"
             alignItems="flex-start"
-
             spacing={5}
         >
             <Grid item
@@ -74,21 +73,14 @@ function Items({sidebarSwitch, sidebarShow}){
                     </Table>
                 </TableContainer>
             </Grid>
-            { 
-                // при перезагрузке sidebarShow = true если до перезагрузки было открыто боковое меню
-                sidebarShow ?
-                (<Grid item
-                    lg={4}
-                >
-                    <Switch>
-                        <Route path="/list/info/:id" render={(props)=><Info sidebarSwitch={sidebarSwitch} {...props}/>} />
-                        <Route path="/list/edit/:id" render={(props)=><ChangeItem sidebarSwitch={sidebarSwitch} {...props}/>}/>
-                    </Switch>
-                </Grid>)
-                : <Redirect to="/list" />
-            }
+            <Grid item
+                lg={4}
+            >
+                <Switch>
+                    <Route exact path="/list/info/:id" render={(props)=><Info sidebarSwitch={sidebarSwitch} {...props}/>} />
+                    <Route exact path="/list/edit/:id" render={(props)=><ChangeItem sidebarSwitch={sidebarSwitch} {...props}/>}/>
+                </Switch>
+            </Grid>
         </Grid>
     );
 }
-
-export default Items;

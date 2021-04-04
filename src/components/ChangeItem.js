@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -24,7 +24,7 @@ const validate = values => {
     return errors;
 };
 
-function ChangeItem({ match, sidebarSwitch }){ 
+export default function ChangeItem({ match, sidebarSwitch }){ 
     // sidebarSwitch - функция изменяющая sidebarShow в компоненте List
 
     // для добавления стилей компонентам material ui
@@ -34,13 +34,11 @@ function ChangeItem({ match, sidebarSwitch }){
 
     const user = useSelector(state => state.items.items.find(item => item.id === match.params.id));
     const inputs = useSelector(state => state.fields.inputs);
-
-    // это будет передано в initialValues формы чтобы 
-    // поля были заполнены текущими значениями (до изменения)
-    const [item] = useState(user);
     
     if(user === undefined){
         return <Redirect to="/" />
+    } else {
+        sidebarSwitch(true);
     }
 
     return (
@@ -48,7 +46,6 @@ function ChangeItem({ match, sidebarSwitch }){
             direction="column"
             justify="flex-start"
             alignItems="flex-start"
-
             spacing={3}
             className={classes.borderLeft}
         >
@@ -58,7 +55,6 @@ function ChangeItem({ match, sidebarSwitch }){
                     variant="h5"
                     color="inherit"
                     gutterBottom
-
                 >
                     Изменить информацию о сотруднике
                 </Typography>
@@ -67,13 +63,12 @@ function ChangeItem({ match, sidebarSwitch }){
                 <Form
                     validate={validate}
                     // чтобы поля были заполнены текущими значениями (до изменения)
-                    initialValues={item}
+                    initialValues={user}
 
                     onSubmit={(formData) => {
 
                         const payload = {
-                            // взят из локального стейта
-                            id: item.id,
+                            id: user.id,
                             // пришло из формы
                             ...formData 
                         }; 
@@ -87,8 +82,7 @@ function ChangeItem({ match, sidebarSwitch }){
                             <Grid container
                                 direction="column"
                                 justify="flex-start"
-                                alignItems="stretch"
-                    
+                                alignItems="stretch"                    
                                 spacing={3}
                             >
                                 { 
@@ -128,11 +122,9 @@ function ChangeItem({ match, sidebarSwitch }){
                                 }
                                 <Grid container
                                     item
-
                                     direction="row"
                                     justify="flex-start"
                                     alignItems="center"
-
                                     spacing={1}
                                 >  
                                     <Grid item>
@@ -157,5 +149,3 @@ function ChangeItem({ match, sidebarSwitch }){
         </Grid>
     )
 }
-
-export default ChangeItem;

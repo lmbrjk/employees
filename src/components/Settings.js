@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import InputLabel from "@material-ui/core/InputLabel";
 
 
-function Settings(){ 
+export default function Settings(){ 
     
     const dispatch = useDispatch();
     
@@ -109,5 +109,3 @@ function Settings(){
         </Grid>
     )
 }
-
-export default Settings;

@@ -18,7 +18,8 @@ const validate = values => {
     return errors;
 };
 
-function NewItem(props) {
+
+export default function NewItem(props) {
 
     const dispatch = useDispatch();
 
@@ -130,5 +131,3 @@ function NewItem(props) {
         </Grid>        
     )
 }
-
-export default NewItem;

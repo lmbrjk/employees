@@ -11,14 +11,13 @@ import Grid from '@material-ui/core/Grid';
 function App() {
   // если sidebarShow = true - список отображается на всю страницу
   // если sidebarShow = false - размер списка уменьшается и сбоку отображается меню
-  let [sidebarShow, sidebarSwitch] = useState(false);
+  let [sidebarShow, sidebarSwitch] = useState();
 
   return (    
     <Container className="App" maxWidth="lg">
       <Grid container
         direction="column"
         alignItems="stretch"
-
         spacing={3}
       >
         <Grid item>
