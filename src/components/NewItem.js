@@ -1,13 +1,15 @@
-import React, {useRef} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Field, Form } from "react-final-form";
+import InputMain from "./inputs/InputMain";
+import InputSelect from "./inputs/InputSelect";
+
+import { Form } from "react-final-form";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
-import InputLabel from "@material-ui/core/InputLabel";
 
 
 const validate = values => {
@@ -17,9 +19,6 @@ const validate = values => {
     }
     return errors;
 };
-
-
-
 
 export default function NewItem(props) {
 
@@ -82,32 +81,11 @@ export default function NewItem(props) {
                             spacing={3}
                         >
                             { 
-                                inputs.map(input => (
-                                    <Grid item
-                                        key={input.nameField}
-                                    >
-                                        <InputLabel htmlFor={input.nameField}>
-                                            {input.labelField}
-                                        </InputLabel>        
-                                        {
-                                            input.typeField === "select" 
-                                                ? <Field
-                                                    type={input.typeField}
-                                                    name={input.nameField}
-                                                    component="select"
-                                                    id={input.nameField}                                                                                        
-                                                >
-                                                    {input.labels.map(option => <option key={option} value={option}>{option}</option>)}
-                                                </Field>
-                                                : <Field
-                                                    type={input.typeField}
-                                                    name={input.nameField}
-                                                    component="input"
-                                                    id={input.nameField}                                                    
-                                                />
-                                        }
-                                    </Grid>                                    
-                                ))             
+                                inputs.map(input => 
+                                    input.typeField === "select" 
+                                        ? <InputSelect input={input} key={input.nameField} />
+                                        : <InputMain input={input} key={input.nameField} />             
+                                )            
                             }
                         
                             <Grid container
