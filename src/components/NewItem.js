@@ -56,14 +56,23 @@ export default function NewItem(props) {
                 render = {({ handleSubmit, form, values }) => (
                     <form onSubmit={ 
                         //необходимо для очистки полей после записи в redux
-                        async (event) => {                            
-                            await handleSubmit(event);
+                        async (event) => {
+                            if(values.button === "back"){
+                                // удаляем из values ключ button чтобы он не был записан в item
+                                delete values.button;
+                                await handleSubmit(event);
 
-                            values.button === "back"
                                 // при нажатии на кнопку "Сохранить и вернуться в список "                
-                                ? props.history.push('/list/')
+                                props.history.push('/list/')
+                            }
+                            else {
+                                // удаляем из values ключ button чтобы он не был записан в item
+                                delete values.button;
+                                await handleSubmit(event);
+
                                 // при нажатии на кнопку "Сохранить и добавить еще"
-                                : form.reset() ;                        
+                                form.reset() ;       
+                            }
                         }
                     }>
                         <Grid container
