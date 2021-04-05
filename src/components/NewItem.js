@@ -20,6 +20,22 @@ const validate = values => {
     return errors;
 };
 
+// нажатие на кнопку "Сохранить и вернуться в список"
+const buttonBack = async (handleSubmit, props, event) => {
+    await handleSubmit(event);
+
+    // при нажатии на кнопку "Сохранить и вернуться в список "                
+    props.history.push('/list/')
+};
+
+// нажатие на кнопку "Сохранить и добавить ещё"
+const buttonMore = async (handleSubmit, form, event) => {
+    await handleSubmit(event);
+
+    // при нажатии на кнопку "Сохранить и добавить еще"
+    form.reset() ;   
+};
+
 export default function NewItem(props) {
 
     const dispatch = useDispatch();
@@ -52,28 +68,8 @@ export default function NewItem(props) {
                     dispatch({type: "CREATE_ITEM", payload});
 
                 }}
-                render = {({ handleSubmit, form, values }) => (
-                    <form onSubmit={ 
-                        //необходимо для очистки полей после записи в redux
-                        async (event) => {
-                            if(values.button === "back"){
-                                // удаляем из values ключ button чтобы он не был записан в item
-                                delete values.button;
-                                await handleSubmit(event);
-
-                                // при нажатии на кнопку "Сохранить и вернуться в список "                
-                                props.history.push('/list/')
-                            }
-                            else {
-                                // удаляем из values ключ button чтобы он не был записан в item
-                                delete values.button;
-                                await handleSubmit(event);
-
-                                // при нажатии на кнопку "Сохранить и добавить еще"
-                                form.reset() ;       
-                            }
-                        }
-                    }>
+                render = {({ handleSubmit, form }) => (
+                    <form>
                         <Grid container
                             direction="column"
                             justify="flex-start"
@@ -96,12 +92,12 @@ export default function NewItem(props) {
                                 spacing={1}
                             > 
                                 <Grid item>
-                                    <Button onClick={ () => form.change("button", "back")} name="back" type="submit" variant="contained" color="primary">
+                                    <Button onClick={ () => buttonBack(handleSubmit, props) } name="back" type="button" variant="contained" color="primary">
                                         Сохранить и вернуться в список
                                     </Button>
                                 </Grid>
                                 <Grid item>
-                                    <Button onClick={ () => form.change("button", "more")} name="more" type="submit" variant="contained" color="primary">
+                                    <Button onClick={ () => buttonMore(handleSubmit, form) } name="more" type="button" variant="contained" color="primary">
                                         Сохранить и добавить еще
                                     </Button>
                                 </Grid>
