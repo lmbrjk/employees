@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -17,6 +17,8 @@ const validate = values => {
     }
     return errors;
 };
+
+
 
 
 export default function NewItem(props) {
@@ -51,13 +53,13 @@ export default function NewItem(props) {
                     dispatch({type: "CREATE_ITEM", payload});
 
                 }}
-                render = {({ handleSubmit, form }) => (
+                render = {({ handleSubmit, form, values }) => (
                     <form onSubmit={ 
                         //необходимо для очистки полей после записи в redux
-                        async (event) => {
+                        async (event) => {                            
                             await handleSubmit(event);
-                            
-                            event.nativeEvent.submitter.name === "back"
+
+                            values.button === "back"
                                 // при нажатии на кнопку "Сохранить и вернуться в список "                
                                 ? props.history.push('/list/')
                                 // при нажатии на кнопку "Сохранить и добавить еще"
@@ -67,8 +69,7 @@ export default function NewItem(props) {
                         <Grid container
                             direction="column"
                             justify="flex-start"
-                            alignItems="flex-start"
-                            
+                            alignItems="flex-start"                            
                             spacing={3}
                         >
                             { 
@@ -101,20 +102,19 @@ export default function NewItem(props) {
                             }
                         
                             <Grid container
-                                item 
-
+                                item
                                 direction="row"
                                 justify="space-around"
                                 alignItems="center"
                                 spacing={1}
                             > 
                                 <Grid item>
-                                    <Button name="back" type="submit" variant="contained" color="primary">
+                                    <Button onClick={ () => form.change("button", "back")} name="back" type="submit" variant="contained" color="primary">
                                         Сохранить и вернуться в список
                                     </Button>
                                 </Grid>
                                 <Grid item>
-                                    <Button name="more" type="submit" variant="contained" color="primary">
+                                    <Button onClick={ () => form.change("button", "more")} name="more" type="submit" variant="contained" color="primary">
                                         Сохранить и добавить еще
                                     </Button>
                                 </Grid>
