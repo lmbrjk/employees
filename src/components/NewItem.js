@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Form } from "react-final-form";
 import { TextInput, SelectInput } from "./inputs";
+import DateInput from "./inputs/DateInput";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -69,8 +70,23 @@ export default function NewItem(props) {
                                 <Grid key={input.nameField} item>
                                     {
                                         input.typeField === "select" 
-                                        ? <SelectInput nameField={input.nameField} labelField={input.labelField} labels={input.labels} />
-                                        : <TextInput nameField={input.nameField} labelField={input.labelField} />   
+                                        ? <SelectInput 
+                                            nameField={input.nameField} 
+                                            labelField={input.labelField} 
+                                            labels={input.labels} 
+                                            typeField={input.typeField} 
+                                          />
+                                        : input.typeField === "date"
+                                            ? <DateInput 
+                                                nameField={input.nameField} 
+                                                labelField={input.labelField} 
+                                                typeField={input.typeField}
+                                              />
+                                            : <TextInput 
+                                                nameField={input.nameField} 
+                                                labelField={input.labelField} 
+                                                typeField={input.typeField}
+                                              />  
                                     }
                                 </Grid>
                             ))}                        

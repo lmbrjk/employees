@@ -93,8 +93,13 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                                 nameField={input.nameField} 
                                                 labelField={input.labelField} 
                                                 labels={input.labels}
+                                                typeField={input.typeField}
                                               />
-                                            : <TextInput nameField={input.nameField} labelField={input.labelField} />   
+                                            : <TextInput 
+                                                nameField={input.nameField} 
+                                                labelField={input.labelField} 
+                                                typeField={input.typeField} 
+                                              />   
                                         }
                                     </Grid>
                                 ))}
