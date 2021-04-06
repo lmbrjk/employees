@@ -79,7 +79,6 @@ export default function ChangeItem({ match, sidebarSwitch }){
                     }}
                     render = {({ handleSubmit }) => (
                         <form onSubmit={ handleSubmit }>
-
                             <Grid container
                                 direction="column"
                                 justify="flex-start"
@@ -94,7 +93,6 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                                 nameField={input.nameField} 
                                                 labelField={input.labelField} 
                                                 labels={input.labels}
-                                                //initialValue={ input.nameField === "post" ? user.post : user.division } 
                                               />
                                             : <TextInput nameField={input.nameField} labelField={input.labelField} />   
                                         }
