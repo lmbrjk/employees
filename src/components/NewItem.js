@@ -2,23 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import InputMain from "./inputs/InputMain";
 import InputSelect from "./inputs/InputSelect";
 
 import { Form } from "react-final-form";
+import { TextInput } from "./inputs";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 
-
-const validate = values => {
-    const errors = {};
-    if (!values.surname) {
-      errors.surname = 'Поле должно быть заполнено';
-    }
-    return errors;
-};
 
 // нажатие на кнопку "Сохранить и вернуться в список"
 const buttonBack = async (handleSubmit, props, event) => {
@@ -57,7 +49,6 @@ export default function NewItem(props) {
                 Добавить сотрудника
             </Typography>            
             <Form 
-                validate={validate}
                 onSubmit={(formData) => {
 
                     const payload = {
@@ -76,14 +67,15 @@ export default function NewItem(props) {
                             alignItems="flex-start"                            
                             spacing={3}
                         >
-                            { 
-                                inputs.map(input => 
-                                    input.typeField === "select" 
-                                        ? <InputSelect input={input} key={input.nameField} />
-                                        : <InputMain input={input} key={input.nameField} />             
-                                )            
-                            }
-                        
+                            { inputs.map(input => (
+                                <Grid key={input.nameField} item>
+                                    {
+                                        input.typeField === "select" 
+                                        ? <InputSelect input={input} />
+                                        : <TextInput nameField={input.nameField} labelField={input.labelField} />   
+                                    }
+                                </Grid>
+                            ))}                        
                             <Grid container
                                 item
                                 direction="row"

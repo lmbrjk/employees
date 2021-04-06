@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import InputMain from "./inputs/InputMain";
+import { TextInput } from "./inputs";
 import InputSelect from "./inputs/InputSelect";
 
 import { Form } from "react-final-form";
@@ -87,13 +87,15 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                 alignItems="stretch"                    
                                 spacing={3}
                             >
-                                { 
-                                    inputs.map(input => 
-                                        input.typeField === "select" 
-                                            ? <InputSelect input={input} key={input.nameField} />
-                                            : <InputMain input={input} key={input.nameField} />             
-                                    )            
-                                }
+                                { inputs.map(input => (
+                                    <Grid key={input.nameField} item>
+                                        {
+                                            input.typeField === "select" 
+                                            ? <InputSelect input={input} />
+                                            : <TextInput nameField={input.nameField} labelField={input.labelField} />   
+                                        }
+                                    </Grid>
+                                ))}
                                 <Grid container
                                     item
                                     direction="row"
