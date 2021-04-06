@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import InputSelect from "./inputs/InputSelect";
-
 import { Form } from "react-final-form";
-import { TextInput } from "./inputs";
+import { TextInput, SelectInput } from "./inputs";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -71,7 +69,7 @@ export default function NewItem(props) {
                                 <Grid key={input.nameField} item>
                                     {
                                         input.typeField === "select" 
-                                        ? <InputSelect input={input} />
+                                        ? <SelectInput nameField={input.nameField} labelField={input.labelField} labels={input.labels} />
                                         : <TextInput nameField={input.nameField} labelField={input.labelField} />   
                                     }
                                 </Grid>

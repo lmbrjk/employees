@@ -2,8 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { TextInput } from "./inputs";
-import InputSelect from "./inputs/InputSelect";
+import { TextInput, SelectInput } from "./inputs";
 
 import { Form } from "react-final-form";
 
@@ -80,7 +79,6 @@ export default function ChangeItem({ match, sidebarSwitch }){
                     }}
                     render = {({ handleSubmit }) => (
                         <form onSubmit={ handleSubmit }>
-
                             <Grid container
                                 direction="column"
                                 justify="flex-start"
@@ -90,8 +88,12 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                 { inputs.map(input => (
                                     <Grid key={input.nameField} item>
                                         {
-                                            input.typeField === "select" 
-                                            ? <InputSelect input={input} />
+                                            input.typeField === "select"                                            
+                                            ? <SelectInput
+                                                nameField={input.nameField} 
+                                                labelField={input.labelField} 
+                                                labels={input.labels}
+                                              />
                                             : <TextInput nameField={input.nameField} labelField={input.labelField} />   
                                         }
                                     </Grid>
