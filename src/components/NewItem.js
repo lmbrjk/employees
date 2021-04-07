@@ -53,10 +53,15 @@ export default function NewItem(props) {
                     const payload = {
                         id: Date.now().toString(),
                         ...formData
-                    }; 
+                    };                     
                     
+                    // приведение даты к формату yyyy-mm-dd
+                    payload.birthday = 
+                    payload.birthday.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
+                    payload.birthday.toLocaleDateString("us-US", { month: '2-digit' })+ "-" + 
+                    payload.birthday.toLocaleDateString("us-US", { day: '2-digit' })
+                                       
                     dispatch({type: "CREATE_ITEM", payload});
-
                 }}
                 render = {({ handleSubmit, form }) => (
                     <form>

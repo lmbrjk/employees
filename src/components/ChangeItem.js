@@ -72,8 +72,17 @@ export default function ChangeItem({ match, sidebarSwitch }){
                         const payload = {
                             id: user.id,
                             // пришло из формы
-                            ...formData 
+                            ...formData
                         }; 
+
+                        // проверка - если дата рождения не менялась, то ее приводить к формату не нужно
+                        if(payload.birthday !== user.birthday){
+                            // приведение даты к формату yyyy-mm-dd
+                            payload.birthday = 
+                            payload.birthday.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
+                            payload.birthday.toLocaleDateString("us-US", { month: '2-digit' })+ "-" + 
+                            payload.birthday.toLocaleDateString("us-US", { day: '2-digit' })
+                        }
 
                         dispatch({type: "CHANGE_ITEM", payload});
 
