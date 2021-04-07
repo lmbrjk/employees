@@ -6,10 +6,10 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 
-const SelectInput = ({ nameField, labelField, labels, typeField }) => (
+const SelectInput = ({ nameField, labelField, labels, initialValue }) => (
     <Field
         name={nameField}
-        component={typeField}
+        component="select"
         id={nameField}                                                                           
     >
         {({ input }) => (
@@ -17,9 +17,11 @@ const SelectInput = ({ nameField, labelField, labels, typeField }) => (
                 <InputLabel htmlFor={nameField}>
                     {labelField}
                 </InputLabel>
+                {console.log(initialValue)}
                 <NativeSelect
                     label={labelField}
-                    value={input.value} onChange={input.onChange}
+                    value={input.value} 
+                    onChange={input.onChange}
                     id={nameField}
                 >
                     {   

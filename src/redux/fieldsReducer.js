@@ -8,7 +8,7 @@ const initialState = {
         { typeField: "date", nameField: "birthday", labelField: "Дата рождения", hidden: true },
         { typeField: "number", nameField: "number", labelField: "Табельный номер", hidden: false },
         { typeField: "select", nameField: "post", labelField: "Должность", labels: ["менеджер", "кассир", "экономист", "начальник отдела"], hidden: true },
-        { typeField: "select", nameField: "division", labelField: "Подразделение", labels: ["кассовых операций", "кредитный отдел", "по работе с юрлицами"], hidden: true }
+        { typeField: "select", nameField: "division", labelField: "Подразделение", labels: ["кассовых операций", "кредитный отдел", "по работе с юрлицами", "корпоративный отдел", "финансового анализа"], hidden: true }
     ]
 };
 

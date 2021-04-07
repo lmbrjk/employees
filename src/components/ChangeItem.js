@@ -102,7 +102,7 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                                 nameField={input.nameField} 
                                                 labelField={input.labelField} 
                                                 labels={input.labels}
-                                                typeField={input.typeField}
+                                                initialValue={user[input.nameField]}
                                               />
                                             : input.typeField === "date"
                                               ? <DateInput 
