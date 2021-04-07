@@ -6,10 +6,10 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 
-const SelectInput = ({ nameField, labelField, labels }) => (
+const SelectInput = ({ nameField, labelField, labels, typeField }) => (
     <Field
         name={nameField}
-        component="select"
+        component={typeField}
         id={nameField}                                                                           
     >
         {({ input }) => (

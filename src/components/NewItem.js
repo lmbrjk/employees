@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Form } from "react-final-form";
-import { TextInput, SelectInput } from "./inputs";
+import { TextInput, SelectInput, DateInput } from "./inputs";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -52,10 +52,15 @@ export default function NewItem(props) {
                     const payload = {
                         id: Date.now().toString(),
                         ...formData
-                    }; 
+                    };                     
                     
+                    // приведение даты к формату yyyy-mm-dd
+                    payload.birthday = 
+                    payload.birthday.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
+                    payload.birthday.toLocaleDateString("us-US", { month: '2-digit' })+ "-" + 
+                    payload.birthday.toLocaleDateString("us-US", { day: '2-digit' })
+                                       
                     dispatch({type: "CREATE_ITEM", payload});
-
                 }}
                 render = {({ handleSubmit, form }) => (
                     <form>
@@ -69,8 +74,22 @@ export default function NewItem(props) {
                                 <Grid key={input.nameField} item>
                                     {
                                         input.typeField === "select" 
-                                        ? <SelectInput nameField={input.nameField} labelField={input.labelField} labels={input.labels} />
-                                        : <TextInput nameField={input.nameField} labelField={input.labelField} />   
+                                        ? <SelectInput 
+                                            nameField={input.nameField} 
+                                            labelField={input.labelField} 
+                                            labels={input.labels} 
+                                            typeField={input.typeField} 
+                                          />
+                                        : input.typeField === "date"
+                                            ? <DateInput 
+                                                nameField={input.nameField} 
+                                                labelField={input.labelField}
+                                              />
+                                            : <TextInput 
+                                                nameField={input.nameField} 
+                                                labelField={input.labelField} 
+                                                typeField={input.typeField}
+                                              />  
                                     }
                                 </Grid>
                             ))}                        

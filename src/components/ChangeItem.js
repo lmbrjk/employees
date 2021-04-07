@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { TextInput, SelectInput } from "./inputs";
+import { TextInput, SelectInput, DateInput } from "./inputs";
 
 import { Form } from "react-final-form";
 
@@ -71,8 +71,17 @@ export default function ChangeItem({ match, sidebarSwitch }){
                         const payload = {
                             id: user.id,
                             // пришло из формы
-                            ...formData 
+                            ...formData
                         }; 
+
+                        // проверка - если дата рождения не менялась, то ее приводить к формату не нужно
+                        if(payload.birthday !== user.birthday){
+                            // приведение даты к формату yyyy-mm-dd
+                            payload.birthday = 
+                            payload.birthday.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
+                            payload.birthday.toLocaleDateString("us-US", { month: '2-digit' })+ "-" + 
+                            payload.birthday.toLocaleDateString("us-US", { day: '2-digit' })
+                        }
 
                         dispatch({type: "CHANGE_ITEM", payload});
 
@@ -93,8 +102,19 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                                 nameField={input.nameField} 
                                                 labelField={input.labelField} 
                                                 labels={input.labels}
+                                                typeField={input.typeField}
                                               />
-                                            : <TextInput nameField={input.nameField} labelField={input.labelField} />   
+                                            : input.typeField === "date"
+                                              ? <DateInput 
+                                                  nameField={input.nameField} 
+                                                  labelField={input.labelField}
+                                                  birthday={user.birthday}
+                                                />
+                                              : <TextInput 
+                                                  nameField={input.nameField} 
+                                                  labelField={input.labelField} 
+                                                  typeField={input.typeField}
+                                                />   
                                         }
                                     </Grid>
                                 ))}
