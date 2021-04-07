@@ -1,21 +1,41 @@
 import React from "react";
 
 import { Field } from "react-final-form";
-import { TextField } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
-const DateInput = ({ nameField, labelField, typeField }) => (
-    <Field
-        id={nameField}
-        name={nameField}
-    >
-        {({ input }) => (
-            <TextField
-                label={labelField}
-                type={typeField}
-                //value={input.value}
-            />
-        )}
-    </Field>
-);
+export default function MaterialUIPickers ({ nameField, labelField, birthday = "2021-04-07" }) {
 
-export default DateInput;
+    // const [selectedDate, setSelectedDate] = React.useState(birthday);
+
+    // const handleDateChange = (date) => {
+    //     setSelectedDate(date);
+    // };
+
+    return (
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Field
+                id={nameField}
+                name={nameField}
+            >                
+                {({ input }) => (
+                    <KeyboardDatePicker
+                        disableToolbar
+                        variant="inline"
+                        format="yyyy-MM-dd"
+                        margin="normal"
+                        id={nameField}
+                        label={labelField}
+                        value={ input.value ? input.value : birthday }
+                        onChange={ input.onChange }
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                )}
+                
+            </Field>
+        </MuiPickersUtilsProvider>
+    );
+};
+

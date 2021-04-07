@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { TextInput, SelectInput } from "./inputs";
+import DateInput from "./inputs/DateInput";
 
 import { Form } from "react-final-form";
 
@@ -95,11 +96,17 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                                 labels={input.labels}
                                                 typeField={input.typeField}
                                               />
-                                            : <TextInput 
-                                                nameField={input.nameField} 
-                                                labelField={input.labelField} 
-                                                typeField={input.typeField} 
-                                              />   
+                                            : input.typeField === "date"
+                                              ? <DateInput 
+                                                  nameField={input.nameField} 
+                                                  labelField={input.labelField}
+                                                  birthday={user.birthday}
+                                                />
+                                              : <TextInput 
+                                                  nameField={input.nameField} 
+                                                  labelField={input.labelField} 
+                                                  typeField={input.typeField}
+                                                />   
                                         }
                                     </Grid>
                                 ))}

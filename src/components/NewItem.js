@@ -79,8 +79,7 @@ export default function NewItem(props) {
                                         : input.typeField === "date"
                                             ? <DateInput 
                                                 nameField={input.nameField} 
-                                                labelField={input.labelField} 
-                                                typeField={input.typeField}
+                                                labelField={input.labelField}
                                               />
                                             : <TextInput 
                                                 nameField={input.nameField} 
