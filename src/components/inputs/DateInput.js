@@ -5,13 +5,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 export default function MaterialUIPickers ({ nameField, labelField, birthday = "2021-04-07" }) {
-
-    // const [selectedDate, setSelectedDate] = React.useState(birthday);
-
-    // const handleDateChange = (date) => {
-    //     setSelectedDate(date);
-    // };
-
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Field
