@@ -2,8 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { TextInput, SelectInput } from "./inputs";
-import DateInput from "./inputs/DateInput";
+import { TextInput, SelectInput, DateInput } from "./inputs";
 
 import { Form } from "react-final-form";
 

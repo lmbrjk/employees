@@ -13,7 +13,6 @@ export default function MaterialUIPickers ({ nameField, labelField, birthday = "
             >                
                 {({ input }) => (
                     <KeyboardDatePicker
-                        //disableToolbar
                         variant="inline"
                         format="yyyy-MM-dd"
                         margin="normal"

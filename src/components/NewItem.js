@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Form } from "react-final-form";
-import { TextInput, SelectInput } from "./inputs";
-import DateInput from "./inputs/DateInput";
+import { TextInput, SelectInput, DateInput } from "./inputs";
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
