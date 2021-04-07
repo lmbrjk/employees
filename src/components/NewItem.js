@@ -9,6 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 
+// для приведения даты к формату yyyy-mm-dd
+import { changeDateFormat } from "../commons/date";
+
 
 // нажатие на кнопку "Сохранить и вернуться в список"
 const buttonBack = async (handleSubmit, props, event) => {
@@ -52,13 +55,10 @@ export default function NewItem(props) {
                     const payload = {
                         id: Date.now().toString(),
                         ...formData
-                    };                     
+                    };
                     
                     // приведение даты к формату yyyy-mm-dd
-                    payload.birthday = 
-                    payload.birthday.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
-                    payload.birthday.toLocaleDateString("us-US", { month: '2-digit' })+ "-" + 
-                    payload.birthday.toLocaleDateString("us-US", { day: '2-digit' })
+                    payload.birthday = changeDateFormat(payload.birthday);
                                        
                     dispatch({type: "CREATE_ITEM", payload});
                 }}
