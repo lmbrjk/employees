@@ -11,6 +11,9 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 
+// для приведения даты к формату yyyy-mm-dd
+import { changeDateFormat } from "../commons/date";
+
 const useStyles = makeStyles({
     borderLeft: { 
         borderLeft: "1px solid black"
@@ -77,10 +80,7 @@ export default function ChangeItem({ match, sidebarSwitch }){
                         // проверка - если дата рождения не менялась, то ее приводить к формату не нужно
                         if(payload.birthday !== user.birthday){
                             // приведение даты к формату yyyy-mm-dd
-                            payload.birthday = 
-                            payload.birthday.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
-                            payload.birthday.toLocaleDateString("us-US", { month: '2-digit' })+ "-" + 
-                            payload.birthday.toLocaleDateString("us-US", { day: '2-digit' })
+                            payload.birthday = changeDateFormat(payload.birthday);
                         }
 
                         dispatch({type: "CHANGE_ITEM", payload});
