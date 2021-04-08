@@ -2,8 +2,6 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { TextInput, SelectInput, DateInput } from "./inputs";
-
 import { Form } from "react-final-form";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 
 // для приведения даты к формату yyyy-mm-dd
 import { changeDateFormat } from "../commons/date";
+// для рендера инпутов в зависимости от typeField
+import { renderInputs } from "../commons/renderInputs";
 
 const useStyles = makeStyles({
     borderLeft: { 
@@ -43,28 +43,6 @@ export default function ChangeItem({ match, sidebarSwitch }){
         return <Redirect to="/" />
     } else {
         sidebarSwitch(true);
-    }
-
-    const renderSwitch = (typeField, input) => {
-        switch(typeField) {
-            case 'select':
-                return <SelectInput
-                    nameField={input.nameField} 
-                    labelField={input.labelField} 
-                    labels={input.labels}
-                />;
-            case 'date':
-                return <DateInput 
-                    nameField={input.nameField} 
-                    labelField={input.labelField}
-                />;
-            default:
-                return <TextInput 
-                    nameField={input.nameField} 
-                    labelField={input.labelField} 
-                    typeField={input.typeField}
-                />;
-        }
     }
 
     return (
@@ -119,7 +97,7 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                 { inputs.map(input => (
                                     <Grid key={input.nameField} item>
                                         { 
-                                            renderSwitch(input.typeField, input) 
+                                            renderInputs(input.typeField, input) 
                                         }
                                     </Grid>
                                 ))}
