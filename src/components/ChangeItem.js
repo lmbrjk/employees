@@ -107,7 +107,6 @@ export default function ChangeItem({ match, sidebarSwitch }){
                                               ? <DateInput 
                                                   nameField={input.nameField} 
                                                   labelField={input.labelField}
-                                                  birthday={user.birthday}
                                                 />
                                               : <TextInput 
                                                   nameField={input.nameField} 

@@ -1,4 +1,9 @@
 export const changeDateFormat = value => {
+
+    // если поле с датой пустое
+    if(!value){
+        return
+    }
     
     value =
         value.toLocaleDateString("us-US", { year: 'numeric' })+ "-"+ 
