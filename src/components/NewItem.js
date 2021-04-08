@@ -35,6 +35,28 @@ export default function NewItem(props) {
 
     const inputs = useSelector(state => state.fields.inputs);
 
+    const renderSwitch = (typeField, input) => {
+        switch(typeField) {
+            case 'select':
+                return <SelectInput
+                    nameField={input.nameField} 
+                    labelField={input.labelField} 
+                    labels={input.labels}
+                />;
+            case 'date':
+                return <DateInput 
+                    nameField={input.nameField} 
+                    labelField={input.labelField}
+                />;
+            default:
+                return <TextInput 
+                    nameField={input.nameField} 
+                    labelField={input.labelField} 
+                    typeField={input.typeField}
+                />;
+        }
+    }
+
     return (
         <Grid container
             direction="column"
@@ -73,22 +95,7 @@ export default function NewItem(props) {
                             { inputs.map(input => (
                                 <Grid key={input.nameField} item>
                                     {
-                                        input.typeField === "select" 
-                                        ? <SelectInput 
-                                            nameField={input.nameField} 
-                                            labelField={input.labelField} 
-                                            labels={input.labels}
-                                          />
-                                        : input.typeField === "date"
-                                            ? <DateInput 
-                                                nameField={input.nameField} 
-                                                labelField={input.labelField}
-                                              />
-                                            : <TextInput 
-                                                nameField={input.nameField} 
-                                                labelField={input.labelField} 
-                                                typeField={input.typeField}
-                                              />  
+                                        renderSwitch(input.typeField, input)
                                     }
                                 </Grid>
                             ))}                        
