@@ -8,10 +8,11 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {rootReducer} from './redux/rootReducer';
 import 'fontsource-roboto';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  
+  composeWithDevTools() 
 );
 
 const app = (

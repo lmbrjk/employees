@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
     "final-form": "^4.20.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -14,6 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
     "web-vitals": "^1.1.0"
   },
   "dependencies": {
@@ -21,8 +24,13 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/pickers": "^3.3.10",
     "@material-ui/styles": "^4.11.3",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.40",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "date-fns": "^2.19.0",
-    "fontsource-roboto": "^4.0.0"
+    "fontsource-roboto": "^4.0.0",
+    "typescript": "^4.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
