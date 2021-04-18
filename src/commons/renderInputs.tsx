@@ -1,6 +1,13 @@
 import { TextInput, SelectInput, DateInput } from "../components/inputs";
 
-export const renderInputs = (typeField, input) => {
+type InputType = {
+    nameField: string,
+    labelField: string,
+    typeField?: string,
+    labels?: Array<string>
+};
+
+export const renderInputs = (typeField: string, input: InputType) => {
     switch(typeField) {
         case 'select':
             return <SelectInput
@@ -9,7 +16,7 @@ export const renderInputs = (typeField, input) => {
                 labels={input.labels}
             />;
         case 'date':
-            return <DateInput 
+            return <DateInput
                 nameField={input.nameField} 
                 labelField={input.labelField}
             />;

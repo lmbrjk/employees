@@ -1,4 +1,6 @@
-export const changeDateFormat = value => {
+type ValueType = {};
+
+export const changeDateFormat = (value: any) => {
 
     // если поле с датой пустое
     if(!value){

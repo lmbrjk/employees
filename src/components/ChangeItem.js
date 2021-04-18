@@ -10,9 +10,9 @@ import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 
 // для приведения даты к формату yyyy-mm-dd
-import { changeDateFormat } from "../commons/date";
+import { changeDateFormat } from "../commons/date.tsx";
 // для рендера инпутов в зависимости от typeField
-import { renderInputs } from "../commons/renderInputs";
+import { renderInputs } from "../commons/renderInputs.tsx";
 
 const useStyles = makeStyles({
     borderLeft: { 
